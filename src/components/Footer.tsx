@@ -114,21 +114,35 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-zinc-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-zinc-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-zinc-500">
             © {year} FixIt Facility Management. All rights reserved.
           </p>
-          <p className="text-sm text-zinc-500">
-            Developed by{" "}
-            <a
-              href="http://techyx360.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-primary underline-offset-4 transition-colors hover:underline hover:decoration-primary hover:decoration-2"
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link
+              href="/privacy-policy"
+              className="text-sm text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
             >
-              Techyx360
-            </a>
-          </p>
+              Privacy Policy
+            </Link>
+            <Link
+              href="/cookies-policy"
+              className="text-sm text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
+            >
+              Cookies Policy
+            </Link>
+            <p className="text-sm text-zinc-500">
+              Developed by{" "}
+              <a
+                href="http://techyx360.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary underline-offset-4 transition-colors hover:underline hover:decoration-primary hover:decoration-2"
+              >
+                Techyx360
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -48,7 +48,7 @@ export default function CookieConsent() {
             site is used. You can accept all cookies or continue with necessary
             cookies only.{" "}
             <Link
-              href="/contact"
+              href="/cookies-policy"
               className="font-medium text-primary underline-offset-2 hover:underline"
             >
               Learn more

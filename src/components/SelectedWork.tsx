@@ -5,51 +5,7 @@ import { useCallback, useState } from "react";
 import Button from "@/components/Button";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-
-const projects = [
-  {
-    name: "Ikeja Bus Terminal",
-    year: "2016",
-    outcome:
-      "Janitorial services across approximately 11,468 square meters from first operations.",
-    image: "/brand/55.png",
-  },
-  {
-    name: "Oshodi Bus Terminal",
-    year: "2018",
-    outcome:
-      "Facility support for one of Nigeria’s busiest hubs, serving over 25,000 commuters daily.",
-    image: "/brand/52.png",
-  },
-  {
-    name: "Challenge Bus Terminal",
-    year: "2022",
-    outcome:
-      "Cleanliness and order for over 12,000 daily commuters in Ibadan, Oyo State.",
-    image: "/brand/54.png",
-  },
-  {
-    name: "Ojoo Bus Terminal",
-    year: "Ibadan",
-    outcome:
-      "A key Ibadan transport hub connecting major routes, serving over 5,000 commuters daily.",
-    image: "/brand/58.png",
-  },
-  {
-    name: "Benin Central Bus Terminal",
-    year: "Benin City",
-    outcome:
-      "Intercity gateway operations with 50+ personnel, accommodating over 18,000 daily commuters.",
-    image: "/brand/59.png",
-  },
-  {
-    name: "Ekiti Bus Terminal",
-    year: "Ado-Ekiti",
-    outcome:
-      "Seamless daily operations with 40+ staff, serving more than 10,000 commuters daily.",
-    image: "/brand/57.png",
-  },
-] as const;
+import { projects } from "@/data/projects";
 
 const PER_PAGE = 3;
 const pageCount = Math.ceil(projects.length / PER_PAGE);
@@ -108,7 +64,6 @@ export default function SelectedWork() {
           delay={120}
           className="mt-12 grid gap-4 lg:mt-14 lg:grid-cols-[0.30fr_0.70fr] lg:gap-5"
         >
-          {/* Left: wider vertical image */}
           <div className="relative hidden min-h-[26rem] overflow-hidden rounded-[20px_4px_20px_4px] lg:block lg:min-h-[28rem]">
             <Image
               src="/brand/3.png"
@@ -119,7 +74,6 @@ export default function SelectedWork() {
             />
           </div>
 
-          {/* Right: 3-up carousel */}
           <div className="overflow-hidden">
             <div
               className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
