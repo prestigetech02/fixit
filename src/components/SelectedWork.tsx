@@ -1,0 +1,207 @@
+"use client";
+
+import Image from "next/image";
+import { useCallback, useState } from "react";
+import Button from "@/components/Button";
+import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/SectionHeader";
+
+const projects = [
+  {
+    name: "Ikeja Bus Terminal",
+    year: "2016",
+    outcome:
+      "Janitorial services across approximately 11,468 square meters from first operations.",
+    image: "/brand/55.png",
+  },
+  {
+    name: "Oshodi Bus Terminal",
+    year: "2018",
+    outcome:
+      "Facility support for one of Nigeria’s busiest hubs, serving over 25,000 commuters daily.",
+    image: "/brand/52.png",
+  },
+  {
+    name: "Challenge Bus Terminal",
+    year: "2022",
+    outcome:
+      "Cleanliness and order for over 12,000 daily commuters in Ibadan, Oyo State.",
+    image: "/brand/54.png",
+  },
+  {
+    name: "Ojoo Bus Terminal",
+    year: "Ibadan",
+    outcome:
+      "A key Ibadan transport hub connecting major routes, serving over 5,000 commuters daily.",
+    image: "/brand/58.png",
+  },
+  {
+    name: "Benin Central Bus Terminal",
+    year: "Benin City",
+    outcome:
+      "Intercity gateway operations with 50+ personnel, accommodating over 18,000 daily commuters.",
+    image: "/brand/59.png",
+  },
+  {
+    name: "Ekiti Bus Terminal",
+    year: "Ado-Ekiti",
+    outcome:
+      "Seamless daily operations with 40+ staff, serving more than 10,000 commuters daily.",
+    image: "/brand/57.png",
+  },
+] as const;
+
+const PER_PAGE = 3;
+const pageCount = Math.ceil(projects.length / PER_PAGE);
+
+function ArrowIcon({ direction }: { direction: "prev" | "next" }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+      {direction === "prev" ? (
+        <path
+          d="M13 8H3M7 4L3 8l4 4"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ) : (
+        <path
+          d="M3 8h10M9 4l4 4-4 4"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      )}
+    </svg>
+  );
+}
+
+export default function SelectedWork() {
+  const [page, setPage] = useState(0);
+
+  const goTo = useCallback((next: number) => {
+    setPage((next + pageCount) % pageCount);
+  }, []);
+
+  return (
+    <section
+      id="selected-work"
+      className="bg-white px-5 py-20 sm:px-8 sm:py-24"
+      aria-labelledby="selected-work-heading"
+    >
+      <div className="mx-auto max-w-6xl">
+        <SectionHeader
+          eyebrow="Our Projects"
+          title="Selected Work"
+          titleId="selected-work-heading"
+          action={
+            <Button href="/our-projects" className="px-6 py-3">
+              View all projects
+            </Button>
+          }
+        />
+
+        <Reveal
+          variant="up"
+          delay={120}
+          className="mt-12 grid gap-4 lg:mt-14 lg:grid-cols-[0.30fr_0.70fr] lg:gap-5"
+        >
+          {/* Left: wider vertical image */}
+          <div className="relative hidden min-h-[26rem] overflow-hidden rounded-[20px_4px_20px_4px] lg:block lg:min-h-[28rem]">
+            <Image
+              src="/brand/3.png"
+              alt="Terminal 3 facility exterior"
+              fill
+              sizes="30vw"
+              className="object-cover object-center"
+            />
+          </div>
+
+          {/* Right: 3-up carousel */}
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              style={{ transform: `translateX(-${page * 100}%)` }}
+            >
+              {Array.from({ length: pageCount }, (_, pageIndex) => (
+                <div
+                  key={pageIndex}
+                  className="grid w-full shrink-0 grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-3"
+                >
+                  {projects
+                    .slice(pageIndex * PER_PAGE, pageIndex * PER_PAGE + PER_PAGE)
+                    .map((project) => (
+                      <article
+                        key={project.name}
+                        className="group flex flex-col"
+                      >
+                        <div className="relative aspect-[4/3] overflow-hidden rounded-[20px_4px_20px_4px]">
+                          <Image
+                            src={project.image}
+                            alt={project.name}
+                            fill
+                            sizes="(max-width: 640px) 100vw, 23vw"
+                            className="object-cover"
+                          />
+                          <span className="absolute left-3 top-3 rounded-sm bg-primary px-2 py-1 text-[0.6875rem] font-semibold tracking-wide text-white uppercase">
+                            {project.year}
+                          </span>
+                        </div>
+
+                        <h3 className="mt-4 text-sm font-bold tracking-tight text-zinc-900 uppercase transition-colors duration-300 group-hover:text-primary sm:text-[0.875rem] lg:text-[0.9375rem]">
+                          {project.name}
+                        </h3>
+                        <p className="mt-2 text-sm leading-relaxed text-zinc-500">
+                          {project.outcome}
+                        </p>
+                      </article>
+                    ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                {Array.from({ length: pageCount }, (_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Show projects page ${i + 1}`}
+                    aria-current={i === page}
+                    onClick={() => goTo(i)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === page
+                        ? "w-8 bg-primary"
+                        : "w-2.5 bg-zinc-300 hover:bg-zinc-400"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  aria-label="Previous projects"
+                  onClick={() => goTo(page - 1)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-800 transition-colors duration-300 hover:border-zinc-500"
+                >
+                  <ArrowIcon direction="prev" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next projects"
+                  onClick={() => goTo(page + 1)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-800 transition-colors duration-300 hover:border-zinc-500"
+                >
+                  <ArrowIcon direction="next" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}

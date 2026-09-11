@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #aa1313;
+  --primary-dark: #8a0f0f;
+  --deep-blue-black: #070b14;
+  --gold: #c9a227;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-deep-blue-black: var(--deep-blue-black);
+  --color-gold: var(--gold);
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-marquee-track {
+  animation: logoMarquee 35s linear infinite;
+}
+
+.logo-marquee:hover .logo-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee-track {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Scroll entrance */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal--up {
+  transform: translateY(28px);
+}
+
+.reveal--down {
+  transform: translateY(-24px);
+}
+
+.reveal--left {
+  transform: translateX(-32px);
+}
+
+.reveal--right {
+  transform: translateX(32px);
+}
+
+.reveal--fade {
+  transform: none;
+}
+
+.reveal--scale {
+  transform: scale(0.96);
+}
+
+.reveal--in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Diagonal shine across media on hover (bottom-left → top-right) */
+@keyframes img-flash-sweep {
+  from {
+    transform: translate(-130%, 70%) rotate(35deg);
+  }
+  to {
+    transform: translate(280%, -70%) rotate(35deg);
+  }
+}
+
+.img-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.img-flash::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 35%;
+  height: 220%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(255 255 255 / 0.55) 50%,
+    transparent 100%
+  );
+  transform: translate(-130%, 70%) rotate(35deg);
+  opacity: 0;
+}
+
+.group\/card:hover .img-flash::before,
+.group\/card:focus-within .img-flash::before {
+  opacity: 1;
+  animation: img-flash-sweep 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Mouse-follow primary outline on service cards */
+.card-mouse-border {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.card-mouse-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2.5px;
+  background: radial-gradient(
+    320px circle at var(--mouse-x) var(--mouse-y),
+    #ff2a2a 0%,
+    var(--primary) 25%,
+    rgb(170 19 19 / 0.55) 45%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.card-mouse-border:hover::before,
+.card-mouse-border:focus-within::before {
+  opacity: 1;
+}
+
+/* Base is blue-black. Wine halves cover by default; on hover they exit,
+   on leave they return (left from top, right from bottom). */
+.btn-split {
+  background-color: var(--deep-blue-black);
+}
+
+.btn-split-half {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: var(--primary);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn-split-half--left {
+  left: 0;
+  transform: translateY(0);
+}
+
+.btn-split-half--right {
+  right: 0;
+  transform: translateY(0);
+}
+
+.btn-split:hover .btn-split-half--left,
+.btn-split:focus-visible .btn-split-half--left {
+  transform: translateY(-101%);
+}
+
+.btn-split:hover .btn-split-half--right,
+.btn-split:focus-visible .btn-split-half--right {
+  transform: translateY(101%);
+}
+
+/* White button for dark/wine surfaces */
+.btn-split--light {
+  color: #7a0e0e;
+  background-color: var(--deep-blue-black);
+}
+
+.btn-split--light .btn-split-half {
+  background-color: #ffffff;
+}
+
+.btn-split--light:hover,
+.btn-split--light:focus-visible {
+  color: #ffffff;
+}
