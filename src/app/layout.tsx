@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import CookieConsent from "@/components/CookieConsent";
+import { QuoteModalProvider } from "@/components/QuoteModal";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,11 +25,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="flex min-h-full flex-col font-sans">
-        <Header />
-        {children}
-        <Footer />
-        <WhatsAppWidget />
-        <CookieConsent />
+        <QuoteModalProvider>
+          <Header />
+          {children}
+          <Footer />
+          <WhatsAppWidget />
+          <CookieConsent />
+        </QuoteModalProvider>
       </body>
     </html>
   );

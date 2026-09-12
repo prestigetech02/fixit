@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, MouseEvent, ReactNode } from "react";
+import { isQuoteHref, useQuoteModal } from "@/components/quote-modal-context";
 
 type ButtonBaseProps = {
   children: ReactNode;
@@ -30,6 +33,8 @@ export default function Button({
   variant = "default",
   ...props
 }: ButtonProps) {
+  const quoteModal = useQuoteModal();
+
   const classes = cx(
     "btn-split group relative inline-flex items-center justify-center overflow-hidden",
     "rounded-sm px-4 py-2.5 text-sm font-semibold",
@@ -47,9 +52,29 @@ export default function Button({
   );
 
   if ("href" in props && props.href !== undefined) {
-    const { href, ...linkProps } = props;
+    const { href, onClick, ...linkProps } = props;
+
+    if (isQuoteHref(href)) {
+      return (
+        <button
+          type="button"
+          className={classes}
+          onClick={() => quoteModal?.openQuoteModal()}
+        >
+          {content}
+        </button>
+      );
+    }
+
     return (
-      <Link href={href} className={classes} {...linkProps}>
+      <Link
+        href={href}
+        className={classes}
+        onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+          onClick?.(event);
+        }}
+        {...linkProps}
+      >
         {content}
       </Link>
     );

@@ -64,7 +64,7 @@ export default function SelectedWork() {
           delay={120}
           className="mt-12 grid gap-4 lg:mt-14 lg:grid-cols-[0.30fr_0.70fr] lg:gap-5"
         >
-          <div className="relative hidden min-h-[26rem] overflow-hidden rounded-[20px_4px_20px_4px] lg:block lg:min-h-[28rem]">
+          <div className="relative hidden min-h-[14rem] overflow-hidden rounded-[20px_4px_20px_4px] lg:block lg:min-h-[16rem]">
             <Image
               src="/brand/3.png"
               alt="Terminal 3 facility exterior"
@@ -116,7 +116,7 @@ export default function SelectedWork() {
               ))}
             </div>
 
-            <div className="mt-8 flex items-center justify-between gap-4">
+            <div className="mt-2 flex items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 {Array.from({ length: pageCount }, (_, i) => (
                   <button
@@ -125,7 +125,7 @@ export default function SelectedWork() {
                     aria-label={`Show projects page ${i + 1}`}
                     aria-current={i === page}
                     onClick={() => goTo(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                    className={`h-2 rounded-full transition-all duration-300 ${
                       i === page
                         ? "w-8 bg-primary"
                         : "w-2.5 bg-zinc-300 hover:bg-zinc-400"
@@ -139,7 +139,7 @@ export default function SelectedWork() {
                   type="button"
                   aria-label="Previous projects"
                   onClick={() => goTo(page - 1)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-800 transition-colors duration-300 hover:border-zinc-500"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-800 transition-colors duration-300 hover:border-zinc-500"
                 >
                   <ArrowIcon direction="prev" />
                 </button>
@@ -147,7 +147,7 @@ export default function SelectedWork() {
                   type="button"
                   aria-label="Next projects"
                   onClick={() => goTo(page + 1)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-800 transition-colors duration-300 hover:border-zinc-500"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-800 transition-colors duration-300 hover:border-zinc-500"
                 >
                   <ArrowIcon direction="next" />
                 </button>
