@@ -10,36 +10,40 @@ const services = [
     title: "Facility Management",
     description:
       "End-to-end stewardship of buildings, people, and daily operations.",
-    href: "/what-we-do/facility-management",
+    href: "/what-we-do",
     image: "/brand/97.png",
     imagePosition: "object-center",
+    alt: "FixIt facility management team supporting a busy public facility",
   },
   {
     label: "Hygiene",
     title: "Environmental & Janitorial",
     description:
       "Cleaning, sanitation, and restroom care for high-traffic spaces.",
-    href: "/what-we-do/environmental-janitorial",
+    href: "/what-we-do/custodial-environmental-hygiene",
     image: "/brand/104.png",
     imagePosition: "object-[35%_center]",
+    alt: "FixIt custodial team delivering environmental hygiene services",
   },
   {
     label: "Environment",
     title: "Waste & Environmental",
     description:
       "Refuse handling, pest control, and facility disinfection programs.",
-    href: "/what-we-do/waste-environmental",
+    href: "/what-we-do/waste-management-fumigation",
     image: "/brand/106.png",
     imagePosition: "object-[45%_center]",
+    alt: "FixIt waste management and environmental care at a facility site",
   },
   {
     label: "Technical",
     title: "Engineering Support",
     description:
       "HVAC, electrical, and preventive maintenance that protects uptime.",
-    href: "/what-we-do/engineering-technical",
+    href: "/what-we-do/hvac-operations",
     image: "/brand/100.png",
     imagePosition: "object-center",
+    alt: "FixIt technician providing engineering and HVAC support",
   },
 ] as const;
 
@@ -77,7 +81,7 @@ export default function Services() {
               >
                 <Image
                   src={service.image}
-                  alt=""
+                  alt={service.alt}
                   fill
                   sizes="(max-width: 1024px) 50vw, 25vw"
                   className={`object-cover transition-transform duration-500 group-hover:scale-105 ${service.imagePosition}`}

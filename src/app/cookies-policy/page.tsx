@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPage from "@/components/LegalPage";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Cookies Policy | FixIt",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Cookies Policy",
   description:
     "How FixIt Facility Management uses cookies and similar technologies on this website.",
-};
+  path: "/cookies-policy",
+});
 
 export default function CookiesPolicyPage() {
   return (
@@ -60,8 +62,10 @@ export default function CookiesPolicyPage() {
                   Analytics and performance cookies.
                 </strong>{" "}
                 Help us understand how visitors use the site, such as which
-                pages are viewed most often. These are used only if you choose
-                &quot;Accept all&quot; on the consent banner.
+                pages are viewed most often. When you choose &quot;Accept
+                all,&quot; we may load Google Analytics (GA4) with IP
+                anonymization enabled. These are not used if you choose
+                &quot;Necessary only.&quot;
               </p>
               <p>
                 We do not use cookies to sell your personal information or to

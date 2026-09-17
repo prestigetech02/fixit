@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
+import { breadcrumbJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us | FixIt",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Contact Us",
   description:
-    "Contact FixIt Facility Management in Lagos. Email, phone, and office address.",
-};
+    "Contact FixIt Facility Management in Agidingbi, Lagos. Request a quote by email, phone, or the online form.",
+  path: "/contact",
+});
 
 const details = [
   {
@@ -35,9 +39,28 @@ const details = [
 
 export default function ContactPage() {
   return (
-    <main className="flex flex-1 flex-col bg-white">
+    <main className="relative flex flex-1 flex-col overflow-hidden bg-white">
+      <JsonLdScript
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Contact Us", path: "/contact" },
+        ])}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.035]"
+        aria-hidden
+      >
+        <Image
+          src="/brand/logo.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-contain object-center scale-[1.35] sm:scale-[1.15]"
+        />
+      </div>
+
       {/* Hero — full bleed to top edge under nav */}
-      <section className="border-b border-zinc-200 bg-zinc-100 px-5 pb-12 pt-28 sm:px-8 sm:pb-14 sm:pt-32">
+      <section className="relative z-10 border-b border-zinc-200/80 bg-zinc-100/80 px-5 pb-12 pt-28 sm:px-8 sm:pb-14 sm:pt-32">
         <div className="mx-auto max-w-6xl">
           <Reveal variant="up" className="max-w-3xl">
             <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
@@ -53,7 +76,7 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal variant="up" delay={100}>
-            <div className="mt-10 grid gap-6 rounded-[20px_4px_20px_4px] border border-zinc-200 bg-white p-6 sm:mt-12 sm:grid-cols-2 sm:p-8 lg:grid-cols-4 lg:gap-0">
+            <div className="mt-10 grid gap-6 rounded-[20px_4px_20px_4px] border border-zinc-200 bg-white/90 p-6 sm:mt-12 sm:grid-cols-2 sm:p-8 lg:grid-cols-4 lg:gap-0">
               {details.map((item, index) => (
                 <div
                   key={item.label}
@@ -90,7 +113,7 @@ export default function ContactPage() {
       </section>
 
       {/* Message section — vertical image left, form right */}
-      <section className="px-5 py-14 sm:px-8 sm:py-16">
+      <section className="relative z-10 px-5 py-14 sm:px-8 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <Reveal variant="up" className="mb-8 max-w-2xl">
             <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
@@ -116,7 +139,7 @@ export default function ContactPage() {
               />
             </div>
 
-            <div className="rounded-[20px_4px_20px_4px] border border-zinc-200 bg-zinc-50 p-6 sm:p-8">
+            <div className="rounded-[20px_4px_20px_4px] border border-zinc-200 bg-zinc-50/95 p-6 sm:p-8">
               <ContactForm />
             </div>
           </Reveal>

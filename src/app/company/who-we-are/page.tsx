@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import CtaBand from "@/components/CtaBand";
+import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
+import { breadcrumbJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Who We Are | FixIt",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Who We Are",
   description:
-    "Learn about FixIt Multiconcepts Limited, our company overview, vision, mission, and journey since 2016.",
-};
+    "Learn about FixIt Multiconcepts Limited, our company overview, vision, mission, and journey in facility management since 2016.",
+  path: "/company/who-we-are",
+});
 
 const milestones = [
   {
@@ -56,6 +60,12 @@ const milestones = [
 export default function WhoWeArePage() {
   return (
     <main className="flex flex-1 flex-col bg-white">
+      <JsonLdScript
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Who We Are", path: "/company/who-we-are" },
+        ])}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-zinc-200 bg-zinc-100">
         <div className="mx-auto grid max-w-6xl lg:grid-cols-[1.05fr_0.95fr]">

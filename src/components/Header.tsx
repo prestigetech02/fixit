@@ -9,7 +9,6 @@ import Button from "@/components/Button";
 const companyLinks = [
   { href: "/company/who-we-are", label: "Who We Are" },
   { href: "/company/our-management", label: "Our Management" },
-  { href: "/company/our-achievements", label: "Our Achievements" },
 ] as const;
 
 const navLinks = [
@@ -42,11 +41,9 @@ function Chevron({ open }: { open: boolean }) {
 
 export default function Header() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(!isHome);
   const companyRef = useRef<HTMLDivElement>(null);
   const companyMenuId = useId();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -61,22 +58,8 @@ export default function Header() {
     closeTimer.current = setTimeout(() => setCompanyOpen(false), 120);
   };
 
-  useEffect(() => {
-    if (!isHome) {
-      setScrolled(true);
-      return;
-    }
-
-    function onScroll() {
-      setScrolled(window.scrollY > 24);
-    }
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
-
-  const solid = !isHome || scrolled;
+  // Always use the solid scrolled header style, including homepage top-of-page.
+  const solid = true;
   const companyActive = pathname.startsWith("/company");
 
   const isActive = (href: string) => {

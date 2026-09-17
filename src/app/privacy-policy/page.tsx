@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPage from "@/components/LegalPage";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | FixIt",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Privacy Policy",
   description:
     "How FixIt Facility Management collects, uses, and protects your personal information.",
-};
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (

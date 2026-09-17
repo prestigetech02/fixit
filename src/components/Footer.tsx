@@ -5,22 +5,24 @@ import Button from "@/components/Button";
 const companyLinks = [
   { href: "/company/who-we-are", label: "Who We Are" },
   { href: "/company/our-management", label: "Our Management" },
-  { href: "/company/our-achievements", label: "Our Achievements" },
 ] as const;
 
 const serviceLinks = [
-  { href: "/what-we-do/facility-management", label: "Facility Management" },
   {
-    href: "/what-we-do/environmental-janitorial",
-    label: "Environmental & Janitorial",
+    href: "/what-we-do/custodial-environmental-hygiene",
+    label: "Custodial & Hygiene",
   },
   {
-    href: "/what-we-do/waste-environmental",
-    label: "Waste & Environmental",
+    href: "/what-we-do/waste-management-fumigation",
+    label: "Waste & Fumigation",
   },
   {
-    href: "/what-we-do/engineering-technical",
-    label: "Engineering Support",
+    href: "/what-we-do/hvac-operations",
+    label: "HVAC Operations",
+  },
+  {
+    href: "/what-we-do/electrical-maintenance",
+    label: "Electrical Maintenance",
   },
   { href: "/what-we-do", label: "See all services" },
 ] as const;

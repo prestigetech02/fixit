@@ -9,6 +9,9 @@ import {
   getServiceHref,
   services,
 } from "@/data/services";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/seo";
+import JsonLdScript from "@/components/JsonLdScript";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -23,12 +26,20 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
-  if (!service) return { title: "Service | FixIt" };
+  if (!service) {
+    return buildPageMetadata({
+      title: "Service",
+      description: "FixIt facility management service details.",
+      path: "/what-we-do",
+    });
+  }
 
-  return {
-    title: `${service.title} | FixIt`,
+  return buildPageMetadata({
+    title: service.title,
     description: service.summary,
-  };
+    path: getServiceHref(service.slug),
+    image: service.image,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
@@ -38,6 +49,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   return (
     <main className="flex flex-1 flex-col bg-zinc-900 text-white">
+      <JsonLdScript
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "What We Do", path: "/what-we-do" },
+            { name: service.title, path: getServiceHref(service.slug) },
+          ]),
+          serviceJsonLd(service),
+        ]}
+      />
       {/* Title */}
       <section className="border-b border-white/10 px-5 pb-12 pt-28 sm:px-8 sm:pb-14 sm:pt-32">
         <Reveal variant="up" className="mx-auto max-w-4xl text-center">
@@ -59,7 +80,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-zinc-800">
                 <Image
                   src={service.image}
-                  alt={service.title}
+                  alt={`${service.title} by FixIt Facility Management`}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 60vw"
@@ -125,6 +146,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   fill
                   sizes="30vw"
                   className="object-cover object-center"
+                  aria-hidden
                 />
                 <div
                   className="absolute inset-0 bg-deep-blue-black/75"

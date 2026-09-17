@@ -26,7 +26,7 @@ export default function ServiceCard({ title, href, image }: ServiceCardProps) {
       <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-zinc-200">
         <Image
           src={image}
-          alt=""
+          alt={`${title} service`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover object-center"

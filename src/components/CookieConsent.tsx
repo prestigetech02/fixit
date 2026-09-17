@@ -3,29 +3,21 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "@/components/Button";
-
-const STORAGE_KEY = "fixit-cookie-consent";
-
-type ConsentValue = "accepted" | "necessary";
+import {
+  readConsent,
+  writeConsent,
+  type ConsentValue,
+} from "@/lib/consent";
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (!stored) setVisible(true);
-    } catch {
-      setVisible(true);
-    }
+    if (!readConsent()) setVisible(true);
   }, []);
 
   const save = (value: ConsentValue) => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, value);
-    } catch {
-      // ignore storage failures
-    }
+    writeConsent(value);
     setVisible(false);
   };
 

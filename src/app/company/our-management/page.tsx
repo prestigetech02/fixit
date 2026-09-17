@@ -1,16 +1,62 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
+import { breadcrumbJsonLd, personJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Our Management | FixIt",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Our Management",
   description:
-    "Meet the leadership guiding FixIt Facility Management across Nigeria.",
-};
+    "Meet the leadership team guiding FixIt Facility Management across Nigeria, including our CEO and operational leads.",
+  path: "/company/our-management",
+});
+
+const managementPeople = [
+  {
+    name: "Mrs. Folasade Oyedele",
+    jobTitle: "Founder, CEO and Managing Director",
+    image: "/team/fixitceo.jpg",
+  },
+  {
+    name: "Temi Fashesin",
+    jobTitle: "Fractional COO",
+    image: "/team/member-1.png",
+  },
+  {
+    name: "Folorunsho Ogunleye",
+    jobTitle: "Accountant",
+    image: "/team/member-2.jpg",
+  },
+  {
+    name: "Segun Oyesanmi",
+    jobTitle: "Operations Manager",
+    image: "/team/member-3.jpg",
+  },
+  {
+    name: "Olajumoke Togun",
+    jobTitle: "Head, People and Talents",
+    image: "/team/member-4.jpg",
+  },
+  {
+    name: "Silifat Ogundipe",
+    jobTitle: "Admin and Social Media Officer",
+    image: "/team/silifat.jpeg",
+  },
+] as const;
 
 export default function OurManagementPage() {
   return (
     <main className="flex flex-1 flex-col bg-white">
+      <JsonLdScript
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Our Management", path: "/company/our-management" },
+          ]),
+          personJsonLd([...managementPeople]),
+        ]}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-zinc-200 bg-zinc-100">
         <div className="mx-auto grid max-w-6xl lg:grid-cols-[1.05fr_0.95fr]">
@@ -59,7 +105,7 @@ export default function OurManagementPage() {
           <div className="relative w-full md:w-2/5">
             <Image
               src="/team/fixitceo.jpg"
-              alt="FixIt Founder, CEO and Managing Director"
+              alt="Mrs. Folasade Oyedele, FixIt Founder, CEO and Managing Director"
               width={534}
               height={800}
               className="h-auto w-full rounded-tl-[80px] rounded-tr-[80px] rounded-bl-[4px] rounded-br-[4px] object-cover object-top"
@@ -171,6 +217,11 @@ export default function OurManagementPage() {
                 role: "Head, People and Talents",
                 image: "/team/member-4.jpg",
               },
+              {
+                name: "Silifat Ogundipe",
+                role: "Admin and Social Media Officer",
+                image: "/team/silifat.jpeg",
+              },
             ].map((member, index) => (
               <Reveal
                 key={member.image}
@@ -181,7 +232,7 @@ export default function OurManagementPage() {
                 <article className="group relative aspect-[3/4] overflow-hidden rounded-xl bg-zinc-700">
                   <Image
                     src={member.image}
-                    alt={`${member.name} — ${member.role}`}
+                    alt={`${member.name}, ${member.role}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"

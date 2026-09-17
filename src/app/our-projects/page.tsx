@@ -2,23 +2,33 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
+import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
 import { projects } from "@/data/projects";
+import { breadcrumbJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Our Projects | FixIt",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Our Projects",
   description:
-    "Selected FixIt facility management projects across major bus terminals and public infrastructure in Nigeria.",
-};
+    "Selected FixIt facility management projects across major bus terminals and public infrastructure in Lagos, Abuja, and cities across Nigeria.",
+  path: "/our-projects",
+});
 
 export default function OurProjectsPage() {
   return (
     <main className="flex flex-1 flex-col bg-white">
+      <JsonLdScript
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Our Projects", path: "/our-projects" },
+        ])}
+      />
       {/* Hero */}
       <section className="relative isolate overflow-hidden">
         <Image
           src="/brand/oshodi-brt.png"
-          alt=""
+          alt="Oshodi bus terminal, a FixIt facility management project site"
           fill
           priority
           sizes="100vw"
@@ -86,7 +96,7 @@ export default function OurProjectsPage() {
                   <div className="relative aspect-[4/3] overflow-hidden bg-zinc-200">
                     <Image
                       src={project.image}
-                      alt={project.name}
+                      alt={`${project.name} in ${project.location}`}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover/card:scale-[1.03]"

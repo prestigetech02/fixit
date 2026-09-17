@@ -1,24 +1,34 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Button from "@/components/Button";
+import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
 import { getServiceHref, services } from "@/data/services";
+import { breadcrumbJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "What We Do | FixIt",
+export const metadata: Metadata = buildPageMetadata({
+  title: "What We Do",
   description:
-    "Explore FixIt facility management services, from janitorial and waste to engineering and full-site operations.",
-};
+    "Explore FixIt facility management services across Nigeria, including custodial hygiene, landscaping, security, waste management, HVAC, electrical, and training.",
+  path: "/what-we-do",
+});
 
 export default function WhatWeDoPage() {
   return (
     <main className="flex flex-1 flex-col bg-white">
+      <JsonLdScript
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "What We Do", path: "/what-we-do" },
+        ])}
+      />
       {/* Hero */}
       <section className="relative isolate overflow-hidden">
         <Image
           src="/brand/oshodi-brt.png"
-          alt=""
+          alt="Oshodi bus terminal facility managed by FixIt"
           fill
           priority
           sizes="100vw"

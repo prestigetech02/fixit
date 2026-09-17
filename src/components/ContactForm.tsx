@@ -3,17 +3,52 @@
 import { useState, type FormEvent } from "react";
 import Button from "@/components/Button";
 
-export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+type Status = "idle" | "sending" | "sent" | "error";
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+export default function ContactForm() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [error, setError] = useState("");
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("sent");
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setStatus("sending");
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          subject: data.get("subject"),
+          message: data.get("message"),
+          company: data.get("company"),
+        }),
+      });
+
+      const payload = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(payload.error || "Unable to send your message.");
+      }
+
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setError(
+        err instanceof Error ? err.message : "Unable to send your message.",
+      );
+    }
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="relative">
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block">
           <span className="text-sm font-medium text-zinc-700">Full name</span>
@@ -68,16 +103,25 @@ export default function ContactForm() {
             className="mt-2 w-full resize-y rounded-sm border border-zinc-200 bg-white px-3 py-3 text-sm text-zinc-900 outline-none transition-colors placeholder:text-zinc-400 focus:border-primary"
           />
         </label>
+
+        {/* Honeypot — leave empty */}
+        <label className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
+          <span>Company</span>
+          <input name="company" type="text" tabIndex={-1} autoComplete="off" />
+        </label>
       </div>
 
       <div className="mt-6">
-        <Button type="submit" className="px-6 py-3">
-          Send message
+        <Button type="submit" className="px-6 py-3" disabled={status === "sending"}>
+          {status === "sending" ? "Sending..." : "Send message"}
         </Button>
         {status === "sent" ? (
           <p className="mt-3 text-sm font-medium text-primary">
-            Thanks. Your message is ready to send once email is connected.
+            Thanks. Your message has been sent. We will get back to you soon.
           </p>
+        ) : null}
+        {status === "error" ? (
+          <p className="mt-3 text-sm font-medium text-red-600">{error}</p>
         ) : null}
       </div>
     </form>

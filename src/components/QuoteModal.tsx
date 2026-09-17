@@ -14,7 +14,10 @@ const fieldClass =
 
 function QuoteModalDialog() {
   const quoteModal = useQuoteModal();
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
+  const [error, setError] = useState("");
   const titleId = useId();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -30,6 +33,7 @@ function QuoteModalDialog() {
       event.preventDefault();
       event.stopPropagation();
       setStatus("idle");
+      setError("");
       openQuoteModal?.();
     }
 
@@ -41,6 +45,7 @@ function QuoteModalDialog() {
     if (!open) return;
 
     setStatus("idle");
+    setError("");
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closeBtnRef.current?.focus();
@@ -56,10 +61,45 @@ function QuoteModalDialog() {
     };
   }, [open, closeQuoteModal]);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("sent");
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setStatus("sending");
+    setError("");
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          organisation: data.get("organisation"),
+          service: data.get("service"),
+          details: data.get("details"),
+          company: data.get("company"),
+        }),
+      });
+
+      const payload = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(payload.error || "Unable to send your quote request.");
+      }
+
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to send your quote request.",
+      );
+    }
   }
 
   if (!open) return null;
@@ -114,7 +154,7 @@ function QuoteModalDialog() {
           </button>
         </div>
 
-        <form onSubmit={onSubmit} className="mt-6">
+        <form onSubmit={onSubmit} className="relative mt-6">
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
               <span className="text-sm font-medium text-zinc-700">Full name</span>
@@ -192,11 +232,25 @@ function QuoteModalDialog() {
                 className={`${fieldClass} resize-y`}
               />
             </label>
+
+            <label className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
+              <span>Company</span>
+              <input
+                name="company"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </label>
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button type="submit" className="px-6 py-3">
-              Submit request
+            <Button
+              type="submit"
+              className="px-6 py-3"
+              disabled={status === "sending"}
+            >
+              {status === "sending" ? "Sending..." : "Submit request"}
             </Button>
             <button
               type="button"
@@ -209,9 +263,11 @@ function QuoteModalDialog() {
 
           {status === "sent" ? (
             <p className="mt-4 text-sm font-medium text-primary">
-              Thanks. Your quote request is ready to send once email is
-              connected.
+              Thanks. Your quote request has been sent. We will follow up soon.
             </p>
+          ) : null}
+          {status === "error" ? (
+            <p className="mt-4 text-sm font-medium text-red-600">{error}</p>
           ) : null}
         </form>
       </div>

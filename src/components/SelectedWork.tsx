@@ -67,7 +67,7 @@ export default function SelectedWork() {
           <div className="relative hidden min-h-[14rem] overflow-hidden rounded-[20px_4px_20px_4px] lg:block lg:min-h-[16rem]">
             <Image
               src="/brand/3.png"
-              alt="Terminal 3 facility exterior"
+              alt="FixIt facility management project site exterior"
               fill
               sizes="30vw"
               className="object-cover object-center"
@@ -94,7 +94,7 @@ export default function SelectedWork() {
                         <div className="relative aspect-[4/3] overflow-hidden rounded-[20px_4px_20px_4px]">
                           <Image
                             src={project.image}
-                            alt={project.name}
+                            alt={`${project.name} in ${project.location}`}
                             fill
                             sizes="(max-width: 640px) 100vw, 23vw"
                             className="object-cover"
