@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
+import SocialLinks from "@/components/SocialLinks";
 
 const companyLinks = [
   { href: "/company/who-we-are", label: "Who We Are" },
-  { href: "/company/our-management", label: "Our Management" },
+  { href: "/company/our-management", label: "Meet the Team" },
+  { href: "/company/our-gallery", label: "Our Gallery" },
+  { href: "/company/our-csr", label: "Our CSR" },
 ] as const;
 
 const serviceLinks = [
@@ -59,6 +62,10 @@ export default function Footer() {
             <Button href="/request-a-quote" className="mt-6 px-5 py-2.5">
               Request a Quote
             </Button>
+            <p className="mt-8 text-xs font-semibold tracking-[0.16em] text-zinc-900 uppercase">
+              Follow us
+            </p>
+            <SocialLinks className="mt-3" />
           </div>
 
           <div>

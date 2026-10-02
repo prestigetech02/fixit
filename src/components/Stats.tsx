@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 
 const stats = [
   { value: 120, label: "Project" },
-  { value: 362, label: "Professional Employees" },
+  { value: 369, label: "Professional Employees" },
   { value: 211, label: "Completed Work" },
   { value: 26, label: "Client" },
 ] as const;

@@ -1,47 +1,59 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import Button from "@/components/Button";
 import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
+import { getTeamMemberHref, team } from "@/data/team";
 import { breadcrumbJsonLd, personJsonLd } from "@/lib/json-ld";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Our Management",
+  title: "Meet the Team",
   description:
     "Meet the leadership team guiding FixIt Facility Management across Nigeria, including our CEO and operational leads.",
   path: "/company/our-management",
 });
 
-const managementPeople = [
+const hrEmail = "hr@fixitmulticoncepts.com";
+
+const expertise = [
   {
-    name: "Mrs. Folasade Oyedele",
-    jobTitle: "Founder, CEO and Managing Director",
-    image: "/team/fixitceo.jpg",
+    label: "Real Estate",
+    icon: (
+      <>
+        <path d="M3 10.5 12 4l9 6.5" />
+        <path d="M5 9.5V20h14V9.5" />
+        <path d="M10 20v-5h4v5" />
+      </>
+    ),
   },
   {
-    name: "Temi Fashesin",
-    jobTitle: "Fractional COO",
-    image: "/team/member-1.png",
+    label: "Construction",
+    icon: (
+      <>
+        <path d="M4 20h16" />
+        <path d="M6 20V9l6-5 6 5v11" />
+        <path d="M9 13h6M9 16.5h6" />
+      </>
+    ),
   },
   {
-    name: "Folorunsho Ogunleye",
-    jobTitle: "Accountant",
-    image: "/team/member-2.jpg",
+    label: "Facility Management",
+    icon: (
+      <>
+        <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5a2 2 0 1 0 3 3l5.8-5.8a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.8-.7-.7-2.8 2.5-2.5Z" />
+      </>
+    ),
   },
   {
-    name: "Segun Oyesanmi",
-    jobTitle: "Operations Manager",
-    image: "/team/member-3.jpg",
-  },
-  {
-    name: "Olajumoke Togun",
-    jobTitle: "Head, People and Talents",
-    image: "/team/member-4.jpg",
-  },
-  {
-    name: "Silifat Ogundipe",
-    jobTitle: "Admin and Social Media Officer",
-    image: "/team/silifat.jpeg",
+    label: "Environmental Sustainability",
+    icon: (
+      <>
+        <path d="M5 19c0-8 5-13 15-14-1 10-6 15-14 15" />
+        <path d="M5 19c3-4 6-6.5 9-8" />
+      </>
+    ),
   },
 ] as const;
 
@@ -52,9 +64,15 @@ export default function OurManagementPage() {
         data={[
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
-            { name: "Our Management", path: "/company/our-management" },
+            { name: "Meet the Team", path: "/company/our-management" },
           ]),
-          personJsonLd([...managementPeople]),
+          personJsonLd(
+            team.map((member) => ({
+              name: member.name,
+              jobTitle: member.role,
+              image: member.image,
+            })),
+          ),
         ]}
       />
       {/* Hero */}
@@ -66,7 +84,7 @@ export default function OurManagementPage() {
                 Company
               </p>
               <h1 className="mt-3 max-w-xl text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl">
-                Our Management
+                Meet the Team
               </h1>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-zinc-500">
                 Experienced leadership committed to excellence, accountability,
@@ -105,7 +123,7 @@ export default function OurManagementPage() {
           <div className="relative w-full md:w-2/5">
             <Image
               src="/team/fixitceo.jpg"
-              alt="Mrs. Folasade Oyedele, FixIt Founder, CEO and Managing Director"
+              alt="FixIt Founder, CEO and Managing Director"
               width={534}
               height={800}
               className="h-auto w-full rounded-tl-[80px] rounded-tr-[80px] rounded-bl-[4px] rounded-br-[4px] object-cover object-top"
@@ -131,8 +149,8 @@ export default function OurManagementPage() {
             </h2>
 
             <p className="mt-8 text-base leading-relaxed text-zinc-600 sm:text-lg">
-              Our founder, Mrs. Folasade Oyedele, is a visionary leader with over 15 years of experience
-              in facilities management and a solid background in real estate.
+              Our founder is a visionary leader with extensive experience in
+              facilities management and a solid background in real estate.
               Holding both bachelor&apos;s and master&apos;s degrees, she is
               deeply passionate about transforming how public spaces are
               managed.
@@ -145,31 +163,41 @@ export default function OurManagementPage() {
               infrastructure excellence.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-8 border-t border-zinc-200 pt-8">
-              <div>
-                <p className="text-2xl font-black tracking-tight text-zinc-900 sm:text-3xl">
-                  15<span className="text-primary">+</span>
-                </p>
-                <p className="mt-1 text-xs font-semibold tracking-[0.14em] text-zinc-500 uppercase">
-                  Years Experience
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl font-black tracking-tight text-zinc-900 sm:text-3xl">
-                  FM
-                </p>
-                <p className="mt-1 text-xs font-semibold tracking-[0.14em] text-zinc-500 uppercase">
-                  & Real Estate
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl font-black tracking-tight text-zinc-900 sm:text-3xl">
-                  BSc<span className="text-primary">/</span>MSc
-                </p>
-                <p className="mt-1 text-xs font-semibold tracking-[0.14em] text-zinc-500 uppercase">
-                  Academic Grounding
-                </p>
-              </div>
+            <div className="mt-10 border-t border-zinc-200 pt-8">
+              <p className="text-xs font-semibold tracking-[0.16em] text-zinc-500 uppercase">
+                Areas of Expertise
+              </p>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                {expertise.map((area) => (
+                  <li
+                    key={area.label}
+                    className="group relative flex items-center gap-3 overflow-hidden rounded-[14px_4px_14px_4px] bg-zinc-100 px-4 py-3.5 ring-1 ring-transparent transition-all duration-300 ease-out hover:bg-white hover:ring-primary/15 motion-safe:hover:-translate-y-0.5"
+                  >
+                    <span
+                      className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-primary transition-transform duration-500 ease-out group-hover:scale-x-100"
+                      aria-hidden
+                    />
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white transition-transform duration-300 ease-out motion-safe:group-hover:-rotate-6 motion-safe:group-hover:scale-110">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                      >
+                        {area.icon}
+                      </svg>
+                    </span>
+                    <span className="text-base font-bold tracking-tight text-zinc-900 transition-all duration-300 ease-out group-hover:text-primary motion-safe:group-hover:translate-x-0.5">
+                      {area.label}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -196,40 +224,18 @@ export default function OurManagementPage() {
           </Reveal>
 
           <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-            {[
-              {
-                name: "Temi Fashesin",
-                role: "Fractional COO",
-                image: "/team/member-1.png",
-              },
-              {
-                name: "Folorunsho Ogunleye",
-                role: "Accountant",
-                image: "/team/member-2.jpg",
-              },
-              {
-                name: "Segun Oyesanmi",
-                role: "Operations Manager",
-                image: "/team/member-3.jpg",
-              },
-              {
-                name: "Olajumoke Togun",
-                role: "Head, People and Talents",
-                image: "/team/member-4.jpg",
-              },
-              {
-                name: "Silifat Ogundipe",
-                role: "Admin and Social Media Officer",
-                image: "/team/silifat.jpeg",
-              },
-            ].map((member, index) => (
+            {team.map((member, index) => (
               <Reveal
-                key={member.image}
+                key={member.slug}
                 as="li"
                 variant="up"
                 delay={100 + index * 100}
               >
-                <article className="group relative aspect-[3/4] overflow-hidden rounded-xl bg-zinc-700">
+                <Link
+                  href={getTeamMemberHref(member.slug)}
+                  aria-label={`View profile: ${member.name}, ${member.role}`}
+                  className="group relative block aspect-[3/4] overflow-hidden rounded-xl bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
                   <Image
                     src={member.image}
                     alt={`${member.name}, ${member.role}`}
@@ -251,11 +257,64 @@ export default function OurManagementPage() {
                     </h3>
                     <p className="mt-0.5 text-sm text-zinc-300">{member.role}</p>
                   </div>
-                </article>
+                </Link>
               </Reveal>
             ))}
           </ul>
         </div>
+      </section>
+
+      {/* Join our team */}
+      <section
+        className="bg-white px-5 py-20 sm:px-8 sm:py-24"
+        aria-labelledby="join-heading"
+      >
+        <Reveal
+          variant="up"
+          className="mx-auto grid max-w-6xl overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-100 lg:grid-cols-[0.9fr_1.1fr]"
+        >
+          <div className="relative min-h-[16rem] sm:min-h-[20rem]">
+            <Image
+              src="/brand/97.png"
+              alt="FixIt team members at work on a facility site"
+              fill
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover object-center"
+            />
+          </div>
+
+          <div className="flex flex-col justify-center px-6 py-10 sm:px-10 sm:py-12">
+            <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
+              Careers
+            </p>
+            <h2
+              id="join-heading"
+              className="mt-3 text-3xl font-black tracking-tight text-zinc-900 sm:text-4xl"
+            >
+              Join Our Team
+            </h2>
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-zinc-600 sm:text-lg">
+              We are always looking for dedicated, disciplined people who take
+              pride in keeping spaces safe, clean, and running smoothly. Send
+              us your CV and tell us the role you are interested in.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <Button
+                href={`mailto:${hrEmail}?subject=${encodeURIComponent("Job Application: FixIt Website")}`}
+                className="px-6 py-3"
+              >
+                Send Your CV
+              </Button>
+              <a
+                href={`mailto:${hrEmail}`}
+                className="text-sm font-semibold text-zinc-700 underline-offset-4 transition-colors hover:text-primary hover:underline hover:decoration-primary hover:decoration-2"
+              >
+                {hrEmail}
+              </a>
+            </div>
+          </div>
+        </Reveal>
       </section>
     </main>
   );

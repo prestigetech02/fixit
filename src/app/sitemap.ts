@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getServiceHref, services } from "@/data/services";
+import { getTeamMemberHref, team } from "@/data/team";
 import { siteConfig } from "@/lib/seo";
 
 type ChangeFrequency = NonNullable<
@@ -21,6 +22,16 @@ const staticRoutes: {
     changeFrequency: "monthly",
     priority: 0.6,
   },
+  {
+    path: "/company/our-gallery",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
+    path: "/company/our-csr",
+    changeFrequency: "monthly",
+    priority: 0.5,
+  },
   { path: "/privacy-policy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/cookies-policy", changeFrequency: "yearly", priority: 0.3 },
 ];
@@ -35,6 +46,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route.priority,
   }));
 
+  const teamPages: MetadataRoute.Sitemap = team.map((member) => ({
+    url: `${siteConfig.url}${getTeamMemberHref(member.slug)}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.4,
+  }));
+
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${siteConfig.url}${getServiceHref(service.slug)}`,
     lastModified,
@@ -42,5 +60,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...servicePages];
+  return [...pages, ...servicePages, ...teamPages];
 }

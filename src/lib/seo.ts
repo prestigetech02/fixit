@@ -31,6 +31,13 @@ export const siteConfig = {
     height: 630,
     alt: "FixIt Facility Management in Lagos, Nigeria",
   },
+  /** Leave a URL empty until the account exists; its icon shows as "coming soon". */
+  social: {
+    facebook: "https://www.facebook.com/share/1HXfT5nVC3/",
+    instagram: "https://www.instagram.com/fixit_mgt/",
+    linkedin: "",
+    youtube: "",
+  },
   keywords: [
     "FixIt",
     "FixIt Facility Management",

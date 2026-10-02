@@ -4,6 +4,7 @@ import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
+import SocialLinks from "@/components/SocialLinks";
 import { breadcrumbJsonLd } from "@/lib/json-ld";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -108,6 +109,17 @@ export default function ContactPage() {
                 </div>
               ))}
             </div>
+          </Reveal>
+
+          <Reveal
+            variant="up"
+            delay={160}
+            className="mt-6 flex flex-wrap items-center gap-4"
+          >
+            <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
+              Follow us
+            </p>
+            <SocialLinks />
           </Reveal>
         </div>
       </section>

@@ -39,6 +39,7 @@ export function organizationJsonLd(): JsonLd {
       name: "Nigeria",
     },
     priceRange: "$$",
+    sameAs: Object.values(siteConfig.social).filter(Boolean),
   };
 }
 

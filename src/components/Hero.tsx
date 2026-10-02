@@ -11,14 +11,18 @@ const slides = [
   {
     src: "/hero/slide-1.png",
     alt: "FixIt facility management team in work gear at a transport terminal",
-    heading: "Nigeria's First Choice Facility managers",
+    heading: [
+      "Managing 14+ Bus Terminals",
+      "and 20 Commercial Buildings",
+      "across Nigeria",
+    ],
     subtext:
       "Trusted stewards of Nigeria’s busiest public spaces, keeping infrastructure safe, reliable, and ready for every journey.",
   },
   {
     src: "/hero/slide-2-disinfection.png",
     alt: "FixIt sanitation specialist performing terminal disinfection with professional PPE",
-    heading: "Committed to Excellence and Efficiency",
+    heading: ["Committed to Excellence and Efficiency"],
     subtext:
       "Hospital-grade hygiene and disciplined processes, protecting the spaces where Nigeria works, travels, and gathers.",
   },
@@ -88,9 +92,14 @@ export default function Hero() {
             <Reveal variant="up" threshold={0.05}>
               <h1
                 key={`heading-${index}`}
-                className="mt-4 max-w-4xl text-4xl font-black leading-[1.08] tracking-tight text-white animate-[heroFade_0.55s_ease-out] sm:mt-6 sm:text-5xl md:text-6xl lg:text-7xl"
+                className="mt-4 max-w-5xl text-balance text-4xl font-black leading-[1.08] tracking-tight text-white animate-[heroFade_0.55s_ease-out] sm:mt-6 sm:text-5xl md:text-6xl lg:text-[62px]"
               >
-                {active.heading}
+                {active.heading.map((line, i) => (
+                  <span key={line} className="lg:block">
+                    {line}
+                    {i < active.heading.length - 1 ? " " : null}
+                  </span>
+                ))}
               </h1>
             </Reveal>
 

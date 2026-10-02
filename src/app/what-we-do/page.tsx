@@ -76,7 +76,7 @@ export default function WhatWeDoPage() {
               id="services-heading"
               className="text-3xl font-black tracking-tight text-zinc-900 sm:text-4xl"
             >
-              Our Services
+              Industry Services
             </h2>
             <p className="mt-3 text-base leading-relaxed text-zinc-500">
               A full suite of facility services built for reliable operations

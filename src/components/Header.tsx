@@ -8,7 +8,9 @@ import Button from "@/components/Button";
 
 const companyLinks = [
   { href: "/company/who-we-are", label: "Who We Are" },
-  { href: "/company/our-management", label: "Our Management" },
+  { href: "/company/our-management", label: "Meet the Team" },
+  { href: "/company/our-gallery", label: "Our Gallery" },
+  { href: "/company/our-csr", label: "Our CSR" },
 ] as const;
 
 const navLinks = [
@@ -101,12 +103,12 @@ export default function Header() {
   const menuIconClass = solid ? "text-zinc-700" : "text-white";
 
   const desktopLinkClass = (active: boolean) =>
-    `text-[0.9375rem] font-medium transition-colors ${
+    `text-[0.8125rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
       active ? navActive : navIdle
     }`;
 
   const mobileLinkClass = (active: boolean) =>
-    `rounded-md px-3 py-2.5 text-base font-medium transition-colors ${
+    `rounded-md px-3 py-2.5 text-sm font-semibold tracking-[0.08em] uppercase transition-colors ${
       active
         ? "bg-primary/5 text-primary underline decoration-primary decoration-2 underline-offset-4"
         : solid
@@ -115,15 +117,15 @@ export default function Header() {
     }`;
 
   return (
-    <header className="fixed inset-x-3 top-3 z-50 sm:inset-x-5 sm:top-4 lg:inset-x-8">
+    <header className="fixed inset-x-0 top-0 z-50">
       <div
-        className={`mx-auto max-w-6xl rounded-2xl transition-all duration-300 ${
+        className={`w-full transition-all duration-300 ${
           solid
-            ? "border border-zinc-200/80 bg-white shadow-[0_12px_40px_-16px_rgba(15,23,42,0.28)]"
-            : "border border-transparent bg-transparent"
+            ? "border-b border-zinc-200/80 bg-white shadow-[0_12px_40px_-16px_rgba(15,23,42,0.28)]"
+            : "border-b border-transparent bg-transparent"
         }`}
       >
-        <div className="flex h-14 items-center justify-between gap-6 px-4 sm:h-16 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between gap-6 px-5 sm:h-[4.5rem] sm:px-8 lg:px-12">
           <Link href="/" className="relative flex h-9 w-[7.5rem] shrink-0 sm:h-11 sm:w-[9.5rem]">
             <Image
               src="/brand/logo-white.png"
@@ -197,7 +199,7 @@ export default function Header() {
                             role="menuitem"
                             href={link.href}
                             aria-current={active ? "page" : undefined}
-                            className={`group/item flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                            className={`group/item flex items-center gap-3 rounded-lg px-3 py-2.5 text-[0.8125rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
                               active
                                 ? "bg-primary/5 text-primary"
                                 : "text-zinc-700 hover:bg-primary/5 hover:text-primary"
@@ -300,7 +302,7 @@ export default function Header() {
         {open && (
           <div
             id="mobile-nav"
-            className={`rounded-b-2xl border-t px-4 py-4 lg:hidden ${
+            className={`border-t px-5 py-4 sm:px-8 lg:hidden ${
               solid
                 ? "border-zinc-200 bg-white"
                 : "border-white/10 bg-deep-blue-black/95 backdrop-blur-md"
@@ -342,7 +344,7 @@ export default function Header() {
                           key={link.href}
                           href={link.href}
                           aria-current={active ? "page" : undefined}
-                          className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                          className={`block rounded-md px-3 py-2 text-[0.8125rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
                             active
                               ? "bg-primary/5 text-primary"
                               : solid

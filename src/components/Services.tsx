@@ -57,7 +57,7 @@ export default function Services() {
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           eyebrow="What We Do"
-          title="Our Services"
+          title="Industry Services"
           titleId="services-heading"
           action={
             <Button href="/what-we-do" className="px-6 py-3">
