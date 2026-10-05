@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
+import TeamPortrait from "@/components/TeamPortrait";
 import {
   getTeamMember,
   getTeamMemberEmail,
   getTeamMemberHref,
+  getTeamMemberSummary,
   team,
 } from "@/data/team";
 import { breadcrumbJsonLd, personJsonLd } from "@/lib/json-ld";
@@ -36,7 +37,7 @@ export async function generateMetadata({
 
   return buildPageMetadata({
     title: `${member.name}, ${member.role}`,
-    description: `${member.name} is ${member.role} at FixIt Facility Management.`,
+    description: getTeamMemberSummary(member),
     path: getTeamMemberHref(member.slug),
     image: member.image,
   });
@@ -85,13 +86,13 @@ export default async function TeamMemberPage({ params }: PageProps) {
           <div className="mt-8 grid gap-8 md:grid-cols-[0.42fr_0.58fr] md:gap-12">
             <Reveal variant="fade">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-200">
-                <Image
-                  src={member.image}
+                <TeamPortrait
+                  name={member.name}
+                  image={member.image}
                   alt={`${member.name}, ${member.role}`}
-                  fill
                   priority
+                  tone="light"
                   sizes="(max-width: 768px) 100vw, 42vw"
-                  className="object-cover object-top"
                 />
               </div>
             </Reveal>
@@ -106,6 +107,14 @@ export default async function TeamMemberPage({ params }: PageProps) {
               <p className="mt-3 text-lg text-zinc-600 sm:text-xl">
                 {member.role}
               </p>
+
+              {member.bio.length > 0 && (
+                <div className="mt-6 space-y-4 text-base leading-relaxed text-zinc-600">
+                  {member.bio.map((paragraph) => (
+                    <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                  ))}
+                </div>
+              )}
 
               <div className="mt-8 border-y border-zinc-300 py-6">
                 <div className="flex items-start gap-3">

@@ -75,15 +75,15 @@ export default function OurCsrPage() {
             className="relative min-h-[18rem] sm:min-h-[22rem] lg:min-h-[28rem]"
           >
             <Image
-              src="/hero/slide-1.png"
-              alt="FixIt facility management team at a transport terminal"
+              src="/csr/csr-hero.jpg"
+              alt="FixIt staff with partners and volunteers at a community sanitation event"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
+              className="object-cover object-[center_40%]"
             />
             <div
-              className="absolute inset-0 bg-deep-blue-black/20"
+              className="absolute inset-0 bg-deep-blue-black/10"
               aria-hidden
             />
           </Reveal>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
+import TeamPortrait from "@/components/TeamPortrait";
 import { getTeamMemberHref, team } from "@/data/team";
 import { breadcrumbJsonLd, personJsonLd } from "@/lib/json-ld";
 import { buildPageMetadata } from "@/lib/seo";
@@ -229,19 +230,19 @@ export default function OurManagementPage() {
                 key={member.slug}
                 as="li"
                 variant="up"
-                delay={100 + index * 100}
+                delay={100 + (index % 4) * 100}
               >
                 <Link
                   href={getTeamMemberHref(member.slug)}
                   aria-label={`View profile: ${member.name}, ${member.role}`}
                   className="group relative block aspect-[3/4] overflow-hidden rounded-xl bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
-                  <Image
-                    src={member.image}
+                  <TeamPortrait
+                    name={member.name}
+                    image={member.image}
                     alt={`${member.name}, ${member.role}`}
-                    fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                   <div
                     className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"

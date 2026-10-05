@@ -91,7 +91,7 @@ export function serviceJsonLd(service: Service): JsonLd {
 export type PersonInput = {
   name: string;
   jobTitle: string;
-  image: string;
+  image?: string;
 };
 
 export function personJsonLd(people: PersonInput[]): JsonLd {
@@ -106,7 +106,7 @@ export function personJsonLd(people: PersonInput[]): JsonLd {
         "@type": "Person",
         name: person.name,
         jobTitle: person.jobTitle,
-        image: absoluteUrl(person.image),
+        ...(person.image ? { image: absoluteUrl(person.image) } : {}),
         worksFor: { "@id": organizationId },
       },
     })),
