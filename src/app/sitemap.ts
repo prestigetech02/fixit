@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getProjectHref, projects } from "@/data/projects";
 import { getServiceHref, services } from "@/data/services";
 import { getTeamMemberHref, team } from "@/data/team";
 import { siteConfig } from "@/lib/seo";
@@ -60,5 +61,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...servicePages, ...teamPages];
+  const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: `${siteConfig.url}${getProjectHref(project.slug)}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...pages, ...servicePages, ...projectPages, ...teamPages];
 }

@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useState } from "react";
 import Button from "@/components/Button";
+import { ProjectStatusBadge } from "@/components/ProjectCard";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import { projects } from "@/data/projects";
+import { getProjectHref, projects } from "@/data/projects";
 
 const PER_PAGE = 3;
 const pageCount = Math.ceil(projects.length / PER_PAGE);
@@ -87,9 +89,11 @@ export default function SelectedWork() {
                   {projects
                     .slice(pageIndex * PER_PAGE, pageIndex * PER_PAGE + PER_PAGE)
                     .map((project) => (
-                      <article
-                        key={project.name}
-                        className="group flex flex-col"
+                      <Link
+                        key={project.slug}
+                        href={getProjectHref(project.slug)}
+                        tabIndex={pageIndex === page ? undefined : -1}
+                        className="group flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                       >
                         <div className="relative aspect-[4/3] overflow-hidden rounded-[20px_4px_20px_4px]">
                           <Image
@@ -97,20 +101,21 @@ export default function SelectedWork() {
                             alt={`${project.name} in ${project.location}`}
                             fill
                             sizes="(max-width: 640px) 100vw, 23vw"
-                            className="object-cover"
+                            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                           />
-                          <span className="absolute left-3 top-3 rounded-sm bg-primary px-2 py-1 text-[0.6875rem] font-semibold tracking-wide text-white uppercase">
-                            {project.year}
-                          </span>
+                          <ProjectStatusBadge
+                            status={project.status}
+                            className="absolute left-3 top-3"
+                          />
                         </div>
 
                         <h3 className="mt-4 text-sm font-bold tracking-tight text-zinc-900 uppercase transition-colors duration-300 group-hover:text-primary sm:text-[0.875rem] lg:text-[0.9375rem]">
                           {project.name}
                         </h3>
                         <p className="mt-2 text-sm leading-relaxed text-zinc-500">
-                          {project.outcome}
+                          {project.summary}
                         </p>
-                      </article>
+                      </Link>
                     ))}
                 </div>
               ))}
