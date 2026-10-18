@@ -7,6 +7,8 @@ type SectionHeaderProps = {
   titleId: string;
   description?: string;
   action?: ReactNode;
+  eyebrowClassName?: string;
+  titleClassName?: string;
 };
 
 export default function SectionHeader({
@@ -15,16 +17,26 @@ export default function SectionHeader({
   titleId,
   description,
   action,
+  eyebrowClassName,
+  titleClassName,
 }: SectionHeaderProps) {
   return (
     <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
       <Reveal variant="up" className="w-full">
-        <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
+        <p
+          className={
+            eyebrowClassName ??
+            "text-sm font-medium tracking-[0.16em] text-primary uppercase"
+          }
+        >
           {eyebrow}
         </p>
         <h2
           id={titleId}
-          className="mt-3 text-3xl font-black tracking-tight text-zinc-900 sm:text-4xl"
+          className={
+            titleClassName ??
+            "mt-3 text-3xl font-black tracking-tight text-zinc-900 sm:text-4xl"
+          }
         >
           {title}
         </h2>

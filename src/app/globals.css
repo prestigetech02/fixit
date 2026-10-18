@@ -16,7 +16,8 @@
   --color-primary-dark: var(--primary-dark);
   --color-deep-blue-black: var(--deep-blue-black);
   --color-gold: var(--gold);
-  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Arial Rounded MT Bold", "Arial Rounded MT", "Helvetica Rounded",
+    Arial, Helvetica, ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -33,6 +34,31 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+/* Content width grows on larger screens so cards stay roomy, not cramped. */
+.site-shell {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 72rem; /* ~1152px, previous max-w-6xl */
+}
+
+@media (min-width: 1280px) {
+  .site-shell {
+    max-width: 80rem; /* 1280px */
+  }
+}
+
+@media (min-width: 1536px) {
+  .site-shell {
+    max-width: 90rem; /* 1440px */
+  }
+}
+
+@media (min-width: 1800px) {
+  .site-shell {
+    max-width: 100rem; /* 1600px */
+  }
 }
 
 /* Hero slideshow */
@@ -53,15 +79,6 @@ body {
   to {
     filter: brightness(0.5);
     transform: translateX(-10%);
-  }
-}
-
-@keyframes heroZoom {
-  from {
-    transform: scale(1.16);
-  }
-  to {
-    transform: scale(1);
   }
 }
 
@@ -104,10 +121,6 @@ body {
   animation: heroDimOut 1.15s cubic-bezier(0.77, 0, 0.175, 1) both;
 }
 
-.hero-zoom {
-  animation: heroZoom 7.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
 .hero-line {
   animation: heroLineUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -124,7 +137,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero-slide-enter,
   .hero-slide-exit,
-  .hero-zoom,
   .hero-line,
   .hero-soft-up {
     animation: none;

@@ -68,7 +68,7 @@ export default function WhoWeArePage() {
       />
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-zinc-200 bg-zinc-100">
-        <div className="mx-auto grid max-w-6xl lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="site-shell grid lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-center px-5 pb-14 pt-28 sm:px-8 sm:pb-16 sm:pt-32 lg:pr-10 lg:pb-20">
             <Reveal variant="up">
               <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
@@ -112,7 +112,7 @@ export default function WhoWeArePage() {
         className="bg-white px-5 py-16 sm:px-8 sm:py-20"
         aria-labelledby="overview-heading"
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Reveal variant="up" className="max-w-3xl">
             <h2
               id="overview-heading"
@@ -147,7 +147,7 @@ export default function WhoWeArePage() {
         className="border-y border-zinc-200 bg-zinc-100 px-5 py-16 sm:px-8 sm:py-20"
         aria-labelledby="vision-mission-heading"
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Reveal variant="up">
             <h2
               id="vision-mission-heading"
@@ -189,7 +189,7 @@ export default function WhoWeArePage() {
         className="bg-white px-5 py-16 sm:px-8 sm:py-20"
         aria-labelledby="journey-heading"
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Reveal variant="up" className="max-w-2xl">
             <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
               Our Journey

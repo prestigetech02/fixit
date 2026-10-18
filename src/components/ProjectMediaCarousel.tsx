@@ -122,7 +122,8 @@ export default function ProjectMediaCarousel({
                     alt={item.alt}
                     fill
                     priority={i === 0}
-                    sizes="(max-width: 1152px) 100vw, 1152px"
+                    quality={90}
+                    sizes="(max-width: 1152px) 100vw, 1600px"
                     className={`object-cover object-center transition-transform duration-[1200ms] ease-out ${
                       isActive ? "scale-100" : "scale-105"
                     }`}

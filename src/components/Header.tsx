@@ -103,12 +103,12 @@ export default function Header() {
   const menuIconClass = solid ? "text-zinc-700" : "text-white";
 
   const desktopLinkClass = (active: boolean) =>
-    `text-[0.8125rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
+    `text-[0.9375rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
       active ? navActive : navIdle
     }`;
 
   const mobileLinkClass = (active: boolean) =>
-    `rounded-md px-3 py-2.5 text-sm font-semibold tracking-[0.08em] uppercase transition-colors ${
+    `rounded-md px-3 py-2.5 text-base font-semibold tracking-[0.08em] uppercase transition-colors ${
       active
         ? "bg-primary/5 text-primary underline decoration-primary decoration-2 underline-offset-4"
         : solid
@@ -126,13 +126,13 @@ export default function Header() {
         }`}
       >
         <div className="flex h-16 items-center justify-between gap-6 px-5 sm:h-[4.5rem] sm:px-8 lg:px-12">
-          <Link href="/" className="relative flex h-9 w-[7.5rem] shrink-0 sm:h-11 sm:w-[9.5rem]">
+          <Link href="/" className="relative flex h-10 w-[8.75rem] shrink-0 sm:h-12 sm:w-[11rem]">
             <Image
               src="/brand/logo-white.png"
               alt="FixIt Facility Management"
               fill
               priority
-              sizes="152px"
+              sizes="176px"
               className={`object-contain object-left transition-opacity duration-300 ${
                 solid ? "opacity-0" : "opacity-100"
               }`}
@@ -142,7 +142,7 @@ export default function Header() {
               alt=""
               fill
               priority
-              sizes="152px"
+              sizes="176px"
               aria-hidden
               className={`object-contain object-left transition-opacity duration-300 ${
                 solid ? "opacity-100" : "opacity-0"
@@ -199,7 +199,7 @@ export default function Header() {
                             role="menuitem"
                             href={link.href}
                             aria-current={active ? "page" : undefined}
-                            className={`group/item flex items-center gap-3 rounded-lg px-3 py-2.5 text-[0.8125rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
+                            className={`group/item flex items-center gap-3 rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
                               active
                                 ? "bg-primary/5 text-primary"
                                 : "text-zinc-700 hover:bg-primary/5 hover:text-primary"
@@ -344,7 +344,7 @@ export default function Header() {
                           key={link.href}
                           href={link.href}
                           aria-current={active ? "page" : undefined}
-                          className={`block rounded-md px-3 py-2 text-[0.8125rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
+                          className={`block rounded-md px-3 py-2 text-[0.9375rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
                             active
                               ? "bg-primary/5 text-primary"
                               : solid

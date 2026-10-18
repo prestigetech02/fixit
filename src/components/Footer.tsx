@@ -42,7 +42,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-zinc-100">
-      <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-16">
+      <div className="site-shell px-5 py-14 sm:px-8 sm:py-16">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_repeat(3,0.8fr)] lg:gap-10">
           <div>
             <Link href="/" className="relative inline-block h-12 w-[10.5rem]">
@@ -125,7 +125,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-zinc-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-zinc-500">
-            © {year} FixIt Facility Management. All rights reserved.
+            Â© {year} FixIt Facility Management. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link

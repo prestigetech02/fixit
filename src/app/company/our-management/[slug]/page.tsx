@@ -66,7 +66,7 @@ export default async function TeamMemberPage({ params }: PageProps) {
       />
 
       <section className="px-5 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-32">
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Link
             href="/company/our-management#team"
             className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-500 transition-colors hover:text-primary"

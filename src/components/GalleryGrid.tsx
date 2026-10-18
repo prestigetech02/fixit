@@ -58,6 +58,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                 src={image.src}
                 alt={image.alt}
                 fill
+                quality={90}
                 sizes="(max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -90,7 +91,8 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                 src={current.src}
                 alt={current.alt}
                 fill
-                sizes="(max-width: 1024px) 100vw, 1024px"
+                quality={90}
+                sizes="(max-width: 1024px) 100vw, 1600px"
                 className="object-contain"
                 priority
               />

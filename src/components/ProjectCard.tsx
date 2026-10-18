@@ -54,6 +54,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           src={project.image}
           alt={`${project.name} in ${project.location}`}
           fill
+          quality={90}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover/card:scale-[1.03]"
         />

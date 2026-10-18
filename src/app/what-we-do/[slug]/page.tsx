@@ -73,7 +73,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {/* Content */}
       <section className="px-5 py-12 sm:px-8 sm:py-16">
-        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1.55fr_0.85fr] lg:gap-10 lg:items-start">
+        <div className="site-shell grid gap-8 lg:grid-cols-[1.55fr_0.85fr] lg:gap-10 lg:items-start">
           {/* Left */}
           <div>
             <Reveal variant="up">

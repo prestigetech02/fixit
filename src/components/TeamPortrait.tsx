@@ -34,6 +34,7 @@ export default function TeamPortrait({
         alt={alt}
         fill
         priority={priority}
+        quality={90}
         sizes={sizes}
         className={`object-cover object-top ${className}`}
       />

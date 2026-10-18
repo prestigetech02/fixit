@@ -52,7 +52,7 @@ export default function OurCsrPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-zinc-200 bg-zinc-100">
-        <div className="mx-auto grid max-w-6xl lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="site-shell grid lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-center px-5 pb-14 pt-28 sm:px-8 sm:pb-16 sm:pt-32 lg:pr-10 lg:pb-20">
             <Reveal variant="up">
               <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
@@ -79,6 +79,7 @@ export default function OurCsrPage() {
               alt="FixIt staff with partners and volunteers at a community sanitation event"
               fill
               priority
+              quality={90}
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover object-[center_40%]"
             />
@@ -116,7 +117,7 @@ export default function OurCsrPage() {
         className="bg-white px-5 py-16 sm:px-8 sm:py-20"
         aria-label="CSR focus areas"
       >
-        <ul className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2">
+        <ul className="site-shell grid gap-5 sm:grid-cols-2">
           {pillars.map((pillar, index) => (
             <Reveal
               key={pillar.title}

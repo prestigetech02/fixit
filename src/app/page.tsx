@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Stats from "@/components/Stats";
+import WhyChooseFixIt from "@/components/WhyChooseFixIt";
 import SelectedWork from "@/components/SelectedWork";
 import ClientFeedback from "@/components/ClientFeedback";
 import CtaBand from "@/components/CtaBand";
@@ -20,6 +21,7 @@ export default function Home() {
       <Hero />
       <Stats />
       <Services />
+      <WhyChooseFixIt />
       <SelectedWork />
       <ClientFeedback />
       <CtaBand />

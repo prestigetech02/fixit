@@ -11,6 +11,8 @@ const slides = [
   {
     src: "/hero/terminal-3.jpg",
     alt: "BRT buses parked outside a FixIt-managed transport terminal in Lagos",
+    /** CSS object-position — use "top" when faces sit high in the frame. */
+    position: "object-center",
     heading: [
       "Managing 14+ Bus Terminals",
       "and 20 Commercial Buildings",
@@ -22,13 +24,16 @@ const slides = [
   {
     src: "/hero/floor-care.jpg",
     alt: "Two FixIt staff with industrial floor scrubbers on a terminal walkway",
+    position: "object-center",
     heading: ["Committed to Excellence", "and Efficiency"],
     subtext:
       "Modern cleaning equipment and disciplined processes, protecting the spaces where Nigeria works, travels, and gathers.",
   },
   {
-    src: "/hero/team.jpg",
+    src: "/hero/team.JPG",
     alt: "FixIt cleaning and maintenance team in uniform at a Lagos terminal",
+    // Keep heads in frame; bias slightly down from pure top.
+    position: "object-[center_15%]",
     heading: ["People Who Take Pride", "in Every Space"],
     subtext:
       "A trained, uniformed workforce on site every day, so your facility runs safely, smoothly, and on schedule.",
@@ -90,34 +95,33 @@ export default function Hero() {
                 alt={slide.alt}
                 fill
                 priority={i === 0}
+                quality={95}
                 sizes="100vw"
-                className={`object-cover object-center ${
-                  isActive || isPrev ? "hero-zoom" : ""
-                }`}
-                style={isPrev ? { animationPlayState: "paused" } : undefined}
+                className={`h-full w-full object-cover ${slide.position}`}
               />
             </div>
           );
         })}
 
+        {/* Dark on the left for copy; fades out by centre so the right shows the photo. */}
         <div
-          className="absolute inset-0 z-[3] bg-deep-blue-black/55"
+          className="absolute inset-0 z-[3] bg-gradient-to-r from-deep-blue-black/90 via-deep-blue-black/45 to-transparent"
           aria-hidden
         />
         <div
-          className="absolute inset-0 z-[3] bg-gradient-to-t from-deep-blue-black/80 via-deep-blue-black/40 to-deep-blue-black/50"
+          className="absolute inset-0 z-[3] bg-gradient-to-t from-deep-blue-black/50 via-transparent to-deep-blue-black/20"
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-5 pt-32 pb-16 text-center sm:px-8 sm:pt-36 lg:pt-40">
-          <div className="flex w-full flex-col items-center">
+        <div className="relative z-10 site-shell flex w-full flex-1 flex-col items-start justify-center px-5 pt-32 pb-16 text-left sm:px-8 sm:pt-36 lg:pt-40">
+          <div className="flex w-full max-w-2xl flex-col items-start xl:max-w-3xl">
             <h1
               key={`heading-${step}`}
-              className="mt-4 max-w-5xl text-balance text-4xl font-black leading-[1.08] tracking-tight text-white sm:mt-6 sm:text-5xl md:text-6xl lg:text-[62px]"
+              className="mt-4 text-balance text-4xl font-black leading-[1.08] tracking-tight text-white sm:mt-6 sm:text-5xl md:text-6xl lg:text-[62px] 2xl:text-[68px]"
             >
               {active.heading.map((line, i) => (
                 <Fragment key={line}>
-                  <span className="inline-block overflow-hidden pb-[0.06em] align-bottom lg:block">
+                  <span className="block overflow-hidden pb-[0.06em]">
                     <span
                       className="hero-line inline-block"
                       style={{ animationDelay: `${textDelay + i * 110}ms` }}
@@ -125,14 +129,13 @@ export default function Hero() {
                       {line}
                     </span>
                   </span>
-                  {i < active.heading.length - 1 ? " " : null}
                 </Fragment>
               ))}
             </h1>
 
             <p
               key={`sub-${step}`}
-              className="hero-soft-up mt-6 max-w-2xl text-lg font-medium leading-relaxed text-white/80 sm:text-xl md:text-2xl"
+              className="hero-soft-up mt-6 max-w-xl text-lg font-medium leading-relaxed text-white/85 sm:text-xl md:text-2xl"
               style={{
                 animationDelay: `${textDelay + active.heading.length * 110 + 120}ms`,
               }}
@@ -141,7 +144,7 @@ export default function Hero() {
             </p>
 
             <Reveal variant="fade" delay={220} threshold={0.05}>
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-10 flex flex-wrap items-center justify-start gap-4">
                 <Button href="/request-a-quote" className="px-7 py-3.5 text-base">
                   Request a Quote
                 </Button>
@@ -159,7 +162,7 @@ export default function Hero() {
           </div>
 
           <Reveal variant="fade" delay={320} threshold={0.05} className="mt-14 sm:mt-16">
-            <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center justify-start gap-3">
               {slides.map((slide, i) => (
                 <button
                   key={slide.src}

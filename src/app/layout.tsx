@@ -15,12 +15,6 @@ export const metadata: Metadata = rootMetadata;
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang={siteConfig.language} className="h-full scroll-smooth antialiased">
-      <head>
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body className="flex min-h-full flex-col font-sans">
         <JsonLdScript data={sitewideJsonLd()} />
         <QuoteModalProvider>

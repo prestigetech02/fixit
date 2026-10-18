@@ -3,12 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
 
-const stats = [
-  { value: 120, label: "Project" },
-  { value: 369, label: "Professional Employees" },
-  { value: 211, label: "Completed Work" },
-  { value: 26, label: "Client" },
-] as const;
+type Stat =
+  | {
+      kind: "number";
+      value: number;
+      /** Shown after the animated number, e.g. "K+", "+", "%". */
+      suffix?: string;
+      label: string;
+    }
+  | {
+      kind: "text";
+      value: string;
+      label: string;
+    };
+
+const stats: Stat[] = [
+  { kind: "number", value: 14, label: "Terminals" },
+  { kind: "number", value: 16, label: "Commercial Buildings" },
+  { kind: "number", value: 290, suffix: "K+", label: "Daily Commuters" },
+  { kind: "number", value: 20, suffix: "+", label: "Locations" },
+  { kind: "text", value: "24/7", label: "Frequency" },
+  { kind: "number", value: 95, suffix: "%", label: "Efficiency" },
+  { kind: "number", value: 60, suffix: "%", label: "Eco Friendly" },
+  { kind: "number", value: 369, label: "Workforce" },
+];
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -24,7 +42,15 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-function StatValue({ value, active }: { value: number; active: boolean }) {
+function AnimatedNumber({
+  value,
+  suffix = "",
+  active,
+}: {
+  value: number;
+  suffix?: string;
+  active: boolean;
+}) {
   const reducedMotion = usePrefersReducedMotion();
   const [display, setDisplay] = useState(reducedMotion ? value : 0);
 
@@ -53,18 +79,18 @@ function StatValue({ value, active }: { value: number; active: boolean }) {
   return (
     <span className="tabular-nums">
       {display}
-      <span className="text-primary">+</span>
+      {suffix ? (
+        <span className="text-white/90">{suffix}</span>
+      ) : null}
     </span>
   );
 }
 
 function StatItem({
-  value,
-  label,
+  stat,
   delay,
 }: {
-  value: number;
-  label: string;
+  stat: Stat;
   delay: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -81,7 +107,7 @@ function StatItem({
           observer.unobserve(node);
         }
       },
-      { threshold: 0.4 },
+      { threshold: 0.35 },
     );
 
     observer.observe(node);
@@ -92,14 +118,22 @@ function StatItem({
     <Reveal
       variant="up"
       delay={delay}
-      className="relative px-2 py-4 text-center sm:py-5 lg:px-6"
+      className="relative px-2 py-4 text-center sm:py-5 lg:px-4 xl:px-5"
     >
       <div ref={ref}>
-        <p className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
-          <StatValue value={value} active={active} />
+        <p className="text-3xl font-black tracking-tight text-white sm:text-4xl xl:text-5xl">
+          {stat.kind === "text" ? (
+            <span className="tabular-nums">{stat.value}</span>
+          ) : (
+            <AnimatedNumber
+              value={stat.value}
+              suffix={stat.suffix}
+              active={active}
+            />
+          )}
         </p>
-        <p className="mt-2.5 text-[0.6875rem] font-semibold tracking-[0.18em] text-zinc-400 uppercase sm:text-xs">
-          {label}
+        <p className="mt-2.5 text-[0.6875rem] font-semibold tracking-[0.16em] text-white/75 uppercase sm:text-xs">
+          {stat.label}
         </p>
       </div>
     </Reveal>
@@ -113,36 +147,43 @@ export default function Stats() {
       className="bg-white px-5 py-12 sm:px-8 sm:py-14"
       aria-labelledby="impact-heading"
     >
-      <Reveal
-        variant="up"
-        className="mx-auto max-w-6xl rounded-[20px_4px_20px_4px] bg-black px-5 py-8 sm:px-10 sm:py-9 lg:px-12 lg:py-10"
-      >
-        <h2
-          id="impact-heading"
-          className="text-center text-2xl font-black tracking-tight text-white sm:text-3xl"
-        >
-          Our Impact
-        </h2>
+      <div className="site-shell">
+        <Reveal variant="up">
+          <h2
+            id="impact-heading"
+            className="text-center text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
+          >
+            Our Impact
+          </h2>
+        </Reveal>
 
-        <div className="mt-6 grid grid-cols-2 lg:mt-8 lg:grid-cols-4">
-          {stats.map((stat, index) => (
-            <div
-              key={stat.label}
-              className={`relative ${
-                index % 2 === 1 ? "border-l border-white/15" : ""
-              } ${
-                index >= 2 ? "border-t border-white/15 lg:border-t-0" : ""
-              } ${index > 0 ? "lg:border-l lg:border-white/15" : ""}`}
-            >
-              <StatItem
-                value={stat.value}
-                label={stat.label}
-                delay={index * 90}
-              />
-            </div>
-          ))}
-        </div>
-      </Reveal>
+        <Reveal
+          variant="up"
+          delay={80}
+          className="mt-6 rounded-[20px_4px_20px_4px] bg-primary px-5 py-8 sm:mt-8 sm:px-10 sm:py-9 lg:px-12 lg:py-10"
+        >
+          <div className="grid grid-cols-2 sm:grid-cols-4">
+            {stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className={[
+                  "relative",
+                  index % 2 === 1 ? "border-l border-white/20" : "",
+                  index % 4 !== 0
+                    ? "sm:border-l sm:border-white/20"
+                    : "sm:border-l-0",
+                  index >= 2 ? "border-t border-white/20" : "",
+                  index >= 4
+                    ? "sm:border-t sm:border-white/20"
+                    : "sm:border-t-0",
+                ].join(" ")}
+              >
+                <StatItem stat={stat} delay={(index % 4) * 80} />
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }

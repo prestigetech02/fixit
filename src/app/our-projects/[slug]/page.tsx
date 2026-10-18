@@ -81,7 +81,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
       {/* Title and media */}
       <section className="px-5 pb-12 pt-28 sm:px-8 sm:pb-14 sm:pt-32">
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Link
             href={`/our-projects#${project.status}-projects`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-500 transition-colors hover:text-primary"
@@ -127,7 +127,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         className="px-5 pb-16 sm:px-8 sm:pb-20"
         aria-labelledby="about-project-heading"
       >
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.45fr_0.9fr] lg:items-start lg:gap-14">
+        <div className="site-shell grid gap-10 lg:grid-cols-[1.45fr_0.9fr] lg:items-start lg:gap-14">
           <Reveal variant="up">
             <h2
               id="about-project-heading"
@@ -215,7 +215,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         className="bg-zinc-50 px-5 py-16 sm:px-8 sm:py-20"
         aria-labelledby="more-projects-heading"
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Reveal variant="up" className="flex flex-wrap items-end justify-between gap-4">
             <h2
               id="more-projects-heading"

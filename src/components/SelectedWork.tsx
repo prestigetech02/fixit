@@ -49,11 +49,13 @@ export default function SelectedWork() {
       className="bg-white px-5 py-20 sm:px-8 sm:py-24"
       aria-labelledby="selected-work-heading"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="site-shell">
         <SectionHeader
           eyebrow="Our Projects"
           title="Selected Work"
           titleId="selected-work-heading"
+          eyebrowClassName="text-base font-medium tracking-[0.16em] text-primary uppercase sm:text-lg"
+          titleClassName="mt-3 text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
           action={
             <Button href="/our-projects" className="px-6 py-3">
               View all projects
@@ -71,6 +73,7 @@ export default function SelectedWork() {
               src="/brand/3.png"
               alt="FixIt facility management project site exterior"
               fill
+              quality={90}
               sizes="30vw"
               className="object-cover object-center"
             />
@@ -100,6 +103,7 @@ export default function SelectedWork() {
                             src={project.image}
                             alt={`${project.name} in ${project.location}`}
                             fill
+                            quality={90}
                             sizes="(max-width: 640px) 100vw, 23vw"
                             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                           />

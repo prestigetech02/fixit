@@ -39,7 +39,7 @@ export default function WhatWeDoPage() {
           aria-hidden
         />
 
-        <div className="relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-center justify-center px-5 pb-16 pt-28 text-center sm:px-8 sm:pb-20 sm:pt-32">
+        <div className="relative site-shell flex min-h-[70vh] flex-col items-center justify-center px-5 pb-16 pt-28 text-center sm:px-8 sm:pb-20 sm:pt-32">
           <Reveal variant="up" className="flex max-w-2xl flex-col items-center">
             <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
               Services
@@ -70,7 +70,7 @@ export default function WhatWeDoPage() {
         className="bg-white px-5 py-16 sm:px-8 sm:py-20"
         aria-labelledby="services-heading"
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Reveal variant="up" className="max-w-2xl">
             <h2
               id="services-heading"

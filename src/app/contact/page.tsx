@@ -60,9 +60,9 @@ export default function ContactPage() {
         />
       </div>
 
-      {/* Hero — full bleed to top edge under nav */}
+      {/* Hero â€” full bleed to top edge under nav */}
       <section className="relative z-10 border-b border-zinc-200/80 bg-zinc-100/80 px-5 pb-12 pt-28 sm:px-8 sm:pb-14 sm:pt-32">
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Reveal variant="up" className="max-w-3xl">
             <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
               Get in touch
@@ -87,7 +87,7 @@ export default function ContactPage() {
                     index === details.length - 1 ? "lg:pr-0" : ""
                   }`}
                 >
-                  <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
+                  <p className="text-sm font-semibold tracking-[0.16em] text-primary uppercase">
                     {item.label}
                   </p>
                   <Link
@@ -102,7 +102,7 @@ export default function ContactPage() {
                         ? "noopener noreferrer"
                         : undefined
                     }
-                    className="mt-3 block text-sm font-medium leading-relaxed text-zinc-800 underline-offset-4 transition-colors hover:text-primary hover:underline hover:decoration-primary hover:decoration-2"
+                    className="mt-3 block text-base font-semibold leading-relaxed text-zinc-800 underline-offset-4 transition-colors hover:text-primary hover:underline hover:decoration-primary hover:decoration-2 sm:text-lg"
                   >
                     {item.value}
                   </Link>
@@ -124,9 +124,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Message section — vertical image left, form right */}
+      {/* Message section â€” vertical image left, form right */}
       <section className="relative z-10 px-5 py-14 sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Reveal variant="up" className="mb-8 max-w-2xl">
             <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
               Send a message

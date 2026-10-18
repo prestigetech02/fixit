@@ -57,7 +57,7 @@ export default function OurProjectsPage() {
           aria-hidden
         />
 
-        <div className="relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-center justify-center px-5 pb-16 pt-28 text-center sm:px-8 sm:pb-20 sm:pt-32">
+        <div className="relative site-shell flex min-h-[70vh] flex-col items-center justify-center px-5 pb-16 pt-28 text-center sm:px-8 sm:pb-20 sm:pt-32">
           <Reveal variant="up" className="flex max-w-2xl flex-col items-center">
             <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
               Portfolio
@@ -93,7 +93,7 @@ export default function OurProjectsPage() {
           }`}
           aria-labelledby={`${group.status}-projects-heading`}
         >
-          <div className="mx-auto max-w-6xl">
+          <div className="site-shell">
             <Reveal variant="up" className="flex flex-wrap items-end justify-between gap-4">
               <div className="max-w-2xl">
                 <h2

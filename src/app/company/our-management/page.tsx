@@ -78,7 +78,7 @@ export default function OurManagementPage() {
       />
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-zinc-200 bg-zinc-100">
-        <div className="mx-auto grid max-w-6xl lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="site-shell grid lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col justify-center px-5 pb-14 pt-28 sm:px-8 sm:pb-16 sm:pt-32 lg:pr-10 lg:pb-20">
             <Reveal variant="up">
               <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
@@ -102,12 +102,13 @@ export default function OurManagementPage() {
             className="relative min-h-[18rem] sm:min-h-[22rem] lg:min-h-[28rem]"
           >
             <Image
-              src="/brand/99.jpg"
-              alt="FixIt management and team briefing"
+              src="/hero/team.JPG"
+              alt="FixIt facility team in uniform"
               fill
               priority
+              quality={90}
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
+              className="object-cover object-top"
             />
             <div
               className="absolute inset-0 bg-deep-blue-black/20"
@@ -117,10 +118,10 @@ export default function OurManagementPage() {
         </div>
       </section>
 
-      {/* CEO / MD — simple two-column flex */}
+      {/* CEO / MD â€” simple two-column flex */}
       <section id="ceo" className="bg-white px-5 py-20 sm:px-8 sm:py-24">
-        <div className="mx-auto flex max-w-6xl flex-col gap-10 md:flex-row md:gap-14">
-          {/* Left column — photo */}
+        <div className="site-shell flex flex-col gap-10 md:flex-row md:gap-14">
+          {/* Left column â€” photo */}
           <div className="relative w-full md:w-2/5">
             <Image
               src="/team/fixitceo.jpg"
@@ -140,7 +141,7 @@ export default function OurManagementPage() {
             </div>
           </div>
 
-          {/* Right column — speech */}
+          {/* Right column â€” speech */}
           <div className="w-full md:w-3/5 md:pt-2">
             <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
               Leadership
@@ -210,7 +211,7 @@ export default function OurManagementPage() {
         className="bg-zinc-800 px-5 py-20 sm:px-8 sm:py-24"
         aria-labelledby="team-heading"
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="site-shell">
           <Reveal variant="up" className="max-w-xl">
             <h2
               id="team-heading"
@@ -272,15 +273,16 @@ export default function OurManagementPage() {
       >
         <Reveal
           variant="up"
-          className="mx-auto grid max-w-6xl overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-100 lg:grid-cols-[0.9fr_1.1fr]"
+          className="site-shell grid overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-100 lg:grid-cols-[0.9fr_1.1fr]"
         >
           <div className="relative min-h-[16rem] sm:min-h-[20rem]">
             <Image
-              src="/brand/97.png"
-              alt="FixIt team members at work on a facility site"
+              src="/team/machine-staff.JPG"
+              alt="FixIt staff with floor-care equipment on a terminal walkway"
               fill
+              quality={90}
               sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover object-center"
+              className="object-cover object-[center_20%]"
             />
           </div>
 

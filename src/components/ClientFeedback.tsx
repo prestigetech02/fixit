@@ -32,11 +32,13 @@ export default function ClientFeedback() {
       className="bg-white px-5 py-20 sm:px-8 sm:py-24"
       aria-labelledby="feedback-heading"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="site-shell">
         <SectionHeader
           eyebrow="Recognition"
           title="Client Feedback & Awards"
           titleId="feedback-heading"
+          eyebrowClassName="text-base font-medium tracking-[0.16em] text-primary uppercase sm:text-lg"
+          titleClassName="mt-3 text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
           description="FixIt Multiconcepts recently earned the Best Service Provider Award from FIRS, just one year after being awarded the contract, a testament to our dedication, performance, and client satisfaction."
         />
 
