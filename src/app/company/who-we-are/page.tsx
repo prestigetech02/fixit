@@ -57,6 +57,31 @@ const milestones = [
   },
 ] as const;
 
+function TimelineArrow() {
+  return (
+    <div
+      className="flex shrink-0 items-center justify-center text-primary lg:px-3 lg:pt-5 xl:px-5"
+      aria-hidden
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        className="rotate-90 lg:rotate-0"
+      >
+        <path
+          d="M5 12h12M13 6l6 6-6 6"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+}
+
 export default function WhoWeArePage() {
   return (
     <main className="flex flex-1 flex-col bg-white">
@@ -92,15 +117,17 @@ export default function WhoWeArePage() {
             className="relative min-h-[18rem] sm:min-h-[22rem] lg:min-h-[28rem]"
           >
             <Image
-              src="/brand/99.jpg"
-              alt="FixIt facility management team at work"
+              src="/hero/who-we-are-hero.JPG"
+              alt="FixIt Multiconcepts facility team in uniform at a transport infrastructure site"
               fill
               priority
+              quality={100}
+              unoptimized
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
+              className="object-cover object-[center_35%]"
             />
             <div
-              className="absolute inset-0 bg-deep-blue-black/20"
+              className="absolute inset-0 bg-deep-blue-black/15"
               aria-hidden
             />
           </Reveal>
@@ -118,7 +145,7 @@ export default function WhoWeArePage() {
               id="overview-heading"
               className="text-3xl font-black tracking-tight text-zinc-900 uppercase sm:text-4xl"
             >
-              Company Overview
+              Growing with Nigeria&apos;s Infrastructure
             </h2>
             <p className="mt-6 text-base leading-relaxed text-zinc-600 sm:text-lg">
               FixIt Multiconcepts Limited is a nationwide facility management
@@ -202,20 +229,23 @@ export default function WhoWeArePage() {
             </h2>
           </Reveal>
 
-          <div className="mt-12 grid gap-10 lg:grid-cols-3 lg:gap-8">
+          <div className="mt-12 flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-0">
             {milestones.map((milestone, index) => (
-              <Reveal
-                key={milestone.year}
-                variant="up"
-                delay={80 + index * 100}
-              >
-                <p className="text-4xl font-black tracking-tight text-primary sm:text-5xl">
-                  {milestone.year}
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-zinc-600 sm:text-base">
-                  {milestone.content}
-                </p>
-              </Reveal>
+              <div key={milestone.year} className="contents">
+                <Reveal
+                  variant="up"
+                  delay={80 + index * 100}
+                  className="min-w-0 flex-1"
+                >
+                  <p className="text-4xl font-black tracking-tight text-primary sm:text-5xl">
+                    {milestone.year}
+                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-zinc-600 sm:text-base">
+                    {milestone.content}
+                  </p>
+                </Reveal>
+                {index < milestones.length - 1 ? <TimelineArrow /> : null}
+              </div>
             ))}
           </div>
         </div>

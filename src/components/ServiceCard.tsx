@@ -8,15 +8,26 @@ type ServiceCardProps = {
   title: string;
   href: string;
   image: string;
+  imageFit?: "cover" | "contain";
 };
 
-export default function ServiceCard({ title, href, image }: ServiceCardProps) {
+export default function ServiceCard({
+  title,
+  href,
+  image,
+  imageFit = "cover",
+}: ServiceCardProps) {
   const onMouseMove = useCallback((event: MouseEvent<HTMLElement>) => {
     const card = event.currentTarget;
     const rect = card.getBoundingClientRect();
     card.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
     card.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
   }, []);
+
+  const preserveQuality =
+    image.includes("landscapping") ||
+    image.includes("water-treatment") ||
+    image.includes("SACM");
 
   return (
     <article
@@ -28,8 +39,14 @@ export default function ServiceCard({ title, href, image }: ServiceCardProps) {
           src={image}
           alt={`${title} service`}
           fill
+          quality={100}
+          unoptimized={preserveQuality}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover object-center"
+          className={
+            imageFit === "contain"
+              ? "object-contain object-center p-2"
+              : "object-cover object-center"
+          }
         />
         <span className="img-flash" aria-hidden />
       </div>

@@ -9,22 +9,24 @@ import Reveal from "@/components/Reveal";
 
 const slides = [
   {
-    src: "/hero/terminal-3.jpg",
-    alt: "BRT buses parked outside a FixIt-managed transport terminal in Lagos",
-    /** CSS object-position — use "top" when faces sit high in the frame. */
+    src: "/hero/slide-1.JPG",
+    alt: "Terminal 3 exterior with blue buses at a FixIt-managed transport hub",
     position: "object-center",
+    align: "right" as const,
     heading: [
-      "Managing 14+ Bus Terminals",
-      "and 20 Commercial Buildings",
+      "Managing 14+",
+      "Bus Terminals and 20",
+      "Commercial Buildings",
       "across Nigeria",
     ],
     subtext:
       "Trusted stewards of Nigeria’s busiest public spaces, keeping infrastructure safe, reliable, and ready for every journey.",
   },
   {
-    src: "/hero/floor-care.jpg",
-    alt: "Two FixIt staff with industrial floor scrubbers on a terminal walkway",
-    position: "object-center",
+    src: "/hero/slide-2.JPG",
+    alt: "FixIt Multiconcepts facility team in uniform at a transport hub",
+    position: "object-[center_30%]",
+    align: "right" as const,
     heading: ["Committed to Excellence", "and Efficiency"],
     subtext:
       "Modern cleaning equipment and disciplined processes, protecting the spaces where Nigeria works, travels, and gathers.",
@@ -34,6 +36,7 @@ const slides = [
     alt: "FixIt cleaning and maintenance team in uniform at a Lagos terminal",
     // Keep heads in frame; bias slightly down from pure top.
     position: "object-[center_15%]",
+    align: "left" as const,
     heading: ["People Who Take Pride", "in Every Space"],
     subtext:
       "A trained, uniformed workforce on site every day, so your facility runs safely, smoothly, and on schedule.",
@@ -61,6 +64,7 @@ export default function Hero() {
   const active = slides[index];
   const isFirstLoad = prev === null;
   const textDelay = isFirstLoad ? 200 : 450;
+  const textRight = active.align === "right";
 
   return (
     <section
@@ -95,7 +99,8 @@ export default function Hero() {
                 alt={slide.alt}
                 fill
                 priority={i === 0}
-                quality={95}
+                quality={100}
+                unoptimized={/slide-[12]\.JPG$/i.test(slide.src)}
                 sizes="100vw"
                 className={`h-full w-full object-cover ${slide.position}`}
               />
@@ -103,9 +108,14 @@ export default function Hero() {
           );
         })}
 
-        {/* Dark on the left for copy; fades out by centre so the right shows the photo. */}
+        {/* Dark band behind copy; flips with slide alignment. */}
         <div
-          className="absolute inset-0 z-[3] bg-gradient-to-r from-deep-blue-black/90 via-deep-blue-black/45 to-transparent"
+          className={[
+            "absolute inset-0 z-[3] transition-opacity duration-500",
+            textRight
+              ? "bg-gradient-to-l from-deep-blue-black/90 via-deep-blue-black/45 to-transparent"
+              : "bg-gradient-to-r from-deep-blue-black/90 via-deep-blue-black/45 to-transparent",
+          ].join(" ")}
           aria-hidden
         />
         <div
@@ -113,17 +123,27 @@ export default function Hero() {
           aria-hidden
         />
 
-        <div className="relative z-10 site-shell flex w-full flex-1 flex-col items-start justify-center px-5 pt-32 pb-16 text-left sm:px-8 sm:pt-36 lg:pt-40">
-          <div className="flex w-full max-w-2xl flex-col items-start xl:max-w-3xl">
+        <div
+          className={[
+            "relative z-10 site-shell flex w-full flex-1 flex-col justify-center px-5 pt-32 pb-16 sm:px-8 sm:pt-36 lg:pt-40",
+            textRight ? "items-end text-right" : "items-start text-left",
+          ].join(" ")}
+        >
+          <div
+            className={[
+              "flex w-full max-w-2xl flex-col xl:max-w-3xl",
+              textRight ? "items-end" : "items-start",
+            ].join(" ")}
+          >
             <h1
               key={`heading-${step}`}
-              className="mt-4 text-balance text-4xl font-black leading-[1.08] tracking-tight text-white sm:mt-6 sm:text-5xl md:text-6xl lg:text-[62px] 2xl:text-[68px]"
+              className="mt-4 text-4xl font-black leading-[1.08] tracking-tight text-white sm:mt-6 sm:text-5xl md:text-6xl lg:text-[62px] 2xl:text-[68px]"
             >
               {active.heading.map((line, i) => (
                 <Fragment key={line}>
                   <span className="block overflow-hidden pb-[0.06em]">
                     <span
-                      className="hero-line inline-block"
+                      className="hero-line inline-block whitespace-nowrap"
                       style={{ animationDelay: `${textDelay + i * 110}ms` }}
                     >
                       {line}
@@ -144,7 +164,12 @@ export default function Hero() {
             </p>
 
             <Reveal variant="fade" delay={220} threshold={0.05}>
-              <div className="mt-10 flex flex-wrap items-center justify-start gap-4">
+              <div
+                className={[
+                  "mt-10 flex flex-wrap items-center gap-4",
+                  textRight ? "justify-end" : "justify-start",
+                ].join(" ")}
+              >
                 <Button href="/request-a-quote" className="px-7 py-3.5 text-base">
                   Request a Quote
                 </Button>
@@ -162,7 +187,12 @@ export default function Hero() {
           </div>
 
           <Reveal variant="fade" delay={320} threshold={0.05} className="mt-14 sm:mt-16">
-            <div className="flex items-center justify-start gap-3">
+            <div
+              className={[
+                "flex items-center gap-3",
+                textRight ? "justify-end" : "justify-start",
+              ].join(" ")}
+            >
               {slides.map((slide, i) => (
                 <button
                   key={slide.src}

@@ -246,10 +246,10 @@ export default function OurManagementPage() {
                     className="transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                   <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+                    className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-black/80 via-black/35 to-transparent"
                     aria-hidden
                   />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
+                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
                     <h3 className="relative inline-block max-w-full overflow-hidden px-1.5 py-0.5 text-lg font-bold tracking-tight text-white">
                       <span
                         aria-hidden
@@ -257,7 +257,9 @@ export default function OurManagementPage() {
                       />
                       <span className="relative z-10">{member.name}</span>
                     </h3>
-                    <p className="mt-0.5 text-sm text-zinc-300">{member.role}</p>
+                    <p className="mt-0.5 text-sm leading-snug text-zinc-200">
+                      {member.role}
+                    </p>
                   </div>
                 </Link>
               </Reveal>

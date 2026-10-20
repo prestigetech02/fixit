@@ -55,13 +55,11 @@ export default function Services() {
           eyebrow="What We Do"
           title="Industry Services"
           titleId="services-heading"
+          className="mx-auto flex w-full max-w-3xl flex-col items-center text-center sm:max-w-4xl lg:max-w-5xl xl:max-w-6xl"
           eyebrowClassName="text-base font-medium tracking-[0.16em] text-primary uppercase sm:text-lg"
           titleClassName="mt-3 text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
-          action={
-            <Button href="/what-we-do" className="px-6 py-3">
-              View all services
-            </Button>
-          }
+          descriptionClassName="mt-4 max-w-none text-lg leading-relaxed text-zinc-500 sm:text-xl"
+          description="We provide comprehensive cleaning, facility management, and maintenance solutions for commercial, industrial, and residential properties. Our services are tailored to meet the unique needs of each client, with a strong commitment to quality, safety, operational efficiency, and excellence."
         />
 
         <ul className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
@@ -128,6 +126,12 @@ export default function Services() {
             );
           })}
         </ul>
+
+        <Reveal variant="fade" delay={200} className="mt-10 flex justify-center sm:mt-12">
+          <Button href="/what-we-do" className="px-6 py-3">
+            View all services
+          </Button>
+        </Reveal>
       </div>
     </section>
   );

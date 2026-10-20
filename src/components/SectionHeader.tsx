@@ -7,8 +7,10 @@ type SectionHeaderProps = {
   titleId: string;
   description?: string;
   action?: ReactNode;
+  className?: string;
   eyebrowClassName?: string;
   titleClassName?: string;
+  descriptionClassName?: string;
 };
 
 export default function SectionHeader({
@@ -17,11 +19,18 @@ export default function SectionHeader({
   titleId,
   description,
   action,
+  className,
   eyebrowClassName,
   titleClassName,
+  descriptionClassName,
 }: SectionHeaderProps) {
   return (
-    <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+    <div
+      className={
+        className ??
+        "mx-auto flex max-w-2xl flex-col items-center text-center"
+      }
+    >
       <Reveal variant="up" className="w-full">
         <p
           className={
@@ -41,7 +50,12 @@ export default function SectionHeader({
           {title}
         </h2>
         {description ? (
-          <p className="mt-4 text-lg leading-relaxed text-zinc-500">
+          <p
+            className={
+              descriptionClassName ??
+              "mt-4 text-lg leading-relaxed text-zinc-500"
+            }
+          >
             {description}
           </p>
         ) : null}

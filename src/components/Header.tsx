@@ -14,7 +14,6 @@ const companyLinks = [
 ] as const;
 
 const navLinks = [
-  { href: "/", label: "Home" },
   { href: "/what-we-do", label: "What We Do" },
   { href: "/our-projects", label: "Our Projects" },
   { href: "/contact", label: "Contact Us" },
@@ -41,6 +40,31 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
+function DropdownArrow({ active }: { active: boolean }) {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      aria-hidden
+      className={`transition-all ${
+        active
+          ? "translate-x-0.5 text-primary opacity-100"
+          : "text-zinc-300 opacity-0 group-hover/item:translate-x-0.5 group-hover/item:text-primary group-hover/item:opacity-100"
+      }`}
+    >
+      <path
+        d="M5 3.5L8.5 7 5 10.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -48,16 +72,16 @@ export default function Header() {
   const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
   const companyRef = useRef<HTMLDivElement>(null);
   const companyMenuId = useId();
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const companyCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const openCompany = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
+    if (companyCloseTimer.current) clearTimeout(companyCloseTimer.current);
     setCompanyOpen(true);
   };
 
   const scheduleCloseCompany = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setCompanyOpen(false), 120);
+    if (companyCloseTimer.current) clearTimeout(companyCloseTimer.current);
+    companyCloseTimer.current = setTimeout(() => setCompanyOpen(false), 120);
   };
 
   // Always use the solid scrolled header style, including homepage top-of-page.
@@ -78,10 +102,8 @@ export default function Header() {
     }
 
     function onPointerDown(event: MouseEvent) {
-      if (
-        companyRef.current &&
-        !companyRef.current.contains(event.target as Node)
-      ) {
+      const target = event.target as Node;
+      if (companyRef.current && !companyRef.current.contains(target)) {
         setCompanyOpen(false);
       }
     }
@@ -91,7 +113,7 @@ export default function Header() {
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("mousedown", onPointerDown);
-      if (closeTimer.current) clearTimeout(closeTimer.current);
+      if (companyCloseTimer.current) clearTimeout(companyCloseTimer.current);
     };
   }, []);
 
@@ -114,6 +136,22 @@ export default function Header() {
         : solid
           ? "text-zinc-700 hover:bg-zinc-50 hover:text-primary"
           : "text-white/90 hover:bg-white/5 hover:text-white"
+    }`;
+
+  const desktopDropdownItemClass = (active: boolean) =>
+    `group/item flex items-center gap-3 rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
+      active
+        ? "bg-primary/5 text-primary"
+        : "text-zinc-700 hover:bg-primary/5 hover:text-primary"
+    }`;
+
+  const mobileDropdownItemClass = (active: boolean) =>
+    `block rounded-md px-3 py-2 text-[0.9375rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
+      active
+        ? "bg-primary/5 text-primary"
+        : solid
+          ? "text-zinc-600 hover:bg-zinc-50 hover:text-primary"
+          : "text-white/70 hover:bg-white/5 hover:text-white"
     }`;
 
   return (
@@ -153,8 +191,8 @@ export default function Header() {
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Main">
             <Link
               href="/"
-              className={desktopLinkClass(isActive("/"))}
               aria-current={isActive("/") ? "page" : undefined}
+              className={desktopLinkClass(isActive("/"))}
             >
               Home
             </Link>
@@ -199,11 +237,7 @@ export default function Header() {
                             role="menuitem"
                             href={link.href}
                             aria-current={active ? "page" : undefined}
-                            className={`group/item flex items-center gap-3 rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
-                              active
-                                ? "bg-primary/5 text-primary"
-                                : "text-zinc-700 hover:bg-primary/5 hover:text-primary"
-                            }`}
+                            className={desktopDropdownItemClass(active)}
                             onClick={() => setCompanyOpen(false)}
                           >
                             <span
@@ -215,26 +249,7 @@ export default function Header() {
                               aria-hidden
                             />
                             <span className="flex-1">{link.label}</span>
-                            <svg
-                              width="14"
-                              height="14"
-                              viewBox="0 0 14 14"
-                              fill="none"
-                              aria-hidden
-                              className={`transition-all ${
-                                active
-                                  ? "translate-x-0.5 text-primary opacity-100"
-                                  : "text-zinc-300 opacity-0 group-hover/item:translate-x-0.5 group-hover/item:text-primary group-hover/item:opacity-100"
-                              }`}
-                            >
-                              <path
-                                d="M5 3.5L8.5 7 5 10.5"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
+                            <DropdownArrow active={active} />
                           </Link>
                         </li>
                       );
@@ -244,18 +259,16 @@ export default function Header() {
               </div>
             </div>
 
-            {navLinks
-              .filter((link) => link.href !== "/")
-              .map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={desktopLinkClass(isActive(link.href))}
-                  aria-current={isActive(link.href) ? "page" : undefined}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={desktopLinkClass(isActive(link.href))}
+                aria-current={isActive(link.href) ? "page" : undefined}
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex items-center gap-3">
@@ -311,8 +324,8 @@ export default function Header() {
             <nav className="flex flex-col gap-1" aria-label="Mobile">
               <Link
                 href="/"
-                className={mobileLinkClass(isActive("/"))}
                 aria-current={isActive("/") ? "page" : undefined}
+                className={mobileLinkClass(isActive("/"))}
                 onClick={() => setOpen(false)}
               >
                 Home
@@ -344,13 +357,7 @@ export default function Header() {
                           key={link.href}
                           href={link.href}
                           aria-current={active ? "page" : undefined}
-                          className={`block rounded-md px-3 py-2 text-[0.9375rem] font-semibold tracking-[0.08em] uppercase transition-colors ${
-                            active
-                              ? "bg-primary/5 text-primary"
-                              : solid
-                                ? "text-zinc-600 hover:bg-zinc-50 hover:text-primary"
-                                : "text-white/70 hover:bg-white/5 hover:text-white"
-                          }`}
+                          className={mobileDropdownItemClass(active)}
                           onClick={() => {
                             setOpen(false);
                             setMobileCompanyOpen(false);
@@ -364,19 +371,17 @@ export default function Header() {
                 )}
               </div>
 
-              {navLinks
-                .filter((link) => link.href !== "/")
-                .map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={mobileLinkClass(isActive(link.href))}
-                    aria-current={isActive(link.href) ? "page" : undefined}
-                    onClick={() => setOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={mobileLinkClass(isActive(link.href))}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
               <Button
                 href="/request-a-quote"

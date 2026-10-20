@@ -96,6 +96,7 @@ export default function WhatWeDoPage() {
                   title={service.title}
                   href={getServiceHref(service.slug)}
                   image={service.image}
+                  imageFit={service.imageFit}
                 />
               </Reveal>
             ))}

@@ -61,7 +61,7 @@ export async function POST(request: Request) {
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${phone}`,
-      `Organisation: ${organisation || "—"}`,
+      `Organisation: ${organisation || "-"}`,
       `Service: ${service}`,
       "",
       "Project details:",

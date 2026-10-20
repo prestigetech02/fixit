@@ -104,7 +104,7 @@ export default function ContactForm() {
           />
         </label>
 
-        {/* Honeypot — leave empty */}
+        {/* Honeypot - leave empty */}
         <label className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
           <span>Company</span>
           <input name="company" type="text" tabIndex={-1} autoComplete="off" />

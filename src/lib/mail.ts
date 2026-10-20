@@ -51,7 +51,7 @@ export function escapeHtml(value: string) {
 }
 
 export function fieldRow(label: string, value: string) {
-  const safe = escapeHtml(value || "—");
+  const safe = escapeHtml(value || "-");
   return `<tr>
     <td style="padding:8px 12px;border-bottom:1px solid #e4e4e7;color:#71717a;font-size:13px;width:140px;vertical-align:top;">${escapeHtml(label)}</td>
     <td style="padding:8px 12px;border-bottom:1px solid #e4e4e7;color:#18181b;font-size:14px;vertical-align:top;">${safe.replace(/\n/g, "<br />")}</td>

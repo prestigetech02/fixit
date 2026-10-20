@@ -45,31 +45,31 @@ export default function Footer() {
       <div className="site-shell px-5 py-14 sm:px-8 sm:py-16">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_repeat(3,0.8fr)] lg:gap-10">
           <div>
-            <Link href="/" className="relative inline-block h-12 w-[10.5rem]">
+            <Link href="/" className="relative inline-block h-16 w-[14rem] sm:h-[4.25rem] sm:w-[15.5rem]">
               <Image
                 src="/brand/logo.png"
                 alt="FixIt Facility Management"
                 fill
-                sizes="168px"
+                sizes="248px"
                 className="object-contain object-left"
               />
             </Link>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-zinc-500">
+            <p className="mt-5 max-w-sm text-base leading-relaxed text-zinc-500 sm:text-lg">
               Nigeria&apos;s first-choice facility managers, committed to
               excellence and efficiency across the spaces that keep the country
               moving.
             </p>
-            <Button href="/request-a-quote" className="mt-6 px-5 py-2.5">
+            <Button href="/request-a-quote" className="mt-6 px-6 py-3 text-base">
               Request a Quote
             </Button>
-            <p className="mt-8 text-xs font-semibold tracking-[0.16em] text-zinc-900 uppercase">
+            <p className="mt-8 text-sm font-semibold tracking-[0.16em] text-zinc-900 uppercase">
               Follow us
             </p>
             <SocialLinks className="mt-3" />
           </div>
 
           <div>
-            <p className="text-xs font-semibold tracking-[0.16em] text-zinc-900 uppercase">
+            <p className="text-sm font-semibold tracking-[0.16em] text-zinc-900 uppercase">
               Explore
             </p>
             <ul className="mt-4 space-y-3">
@@ -77,7 +77,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
+                    className="text-base text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
                   >
                     {link.label}
                   </Link>
@@ -87,7 +87,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold tracking-[0.16em] text-zinc-900 uppercase">
+            <p className="text-sm font-semibold tracking-[0.16em] text-zinc-900 uppercase">
               Company
             </p>
             <ul className="mt-4 space-y-3">
@@ -95,7 +95,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
+                    className="text-base text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
                   >
                     {link.label}
                   </Link>
@@ -105,7 +105,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold tracking-[0.16em] text-zinc-900 uppercase">
+            <p className="text-sm font-semibold tracking-[0.16em] text-zinc-900 uppercase">
               Services
             </p>
             <ul className="mt-4 space-y-3">
@@ -113,7 +113,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
+                    className="text-base text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
                   >
                     {link.label}
                   </Link>
@@ -124,23 +124,23 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-zinc-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-zinc-500">
-            Â© {year} FixIt Facility Management. All rights reserved.
+          <p className="text-base text-zinc-500">
+            © {year} FixIt Facility Management. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link
               href="/privacy-policy"
-              className="text-sm text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
+              className="text-base text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
             >
               Privacy Policy
             </Link>
             <Link
               href="/cookies-policy"
-              className="text-sm text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
+              className="text-base text-zinc-500 underline-offset-4 transition-colors hover:text-zinc-800 hover:underline hover:decoration-primary hover:decoration-2"
             >
               Cookies Policy
             </Link>
-            <p className="text-sm text-zinc-500">
+            <p className="text-base text-zinc-500">
               Developed by{" "}
               <a
                 href="http://techyx360.com"

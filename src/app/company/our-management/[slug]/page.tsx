@@ -116,36 +116,38 @@ export default async function TeamMemberPage({ params }: PageProps) {
                 </div>
               )}
 
-              <div className="mt-8 border-y border-zinc-300 py-6">
-                <div className="flex items-start gap-3">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="mt-0.5 shrink-0 text-primary"
-                    aria-hidden
-                  >
-                    <rect x="3" y="5" width="18" height="14" rx="2" />
-                    <path d="m3 7 9 6 9-6" />
-                  </svg>
-                  <div>
-                    <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
-                      Email
-                    </p>
-                    <a
-                      href={`mailto:${email}`}
-                      className="mt-1 block text-base font-medium text-zinc-800 underline-offset-4 transition-colors hover:text-primary hover:underline hover:decoration-primary hover:decoration-2"
+              {email ? (
+                <div className="mt-8 border-y border-zinc-300 py-6">
+                  <div className="flex items-start gap-3">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="mt-0.5 shrink-0 text-primary"
+                      aria-hidden
                     >
-                      {email}
-                    </a>
+                      <rect x="3" y="5" width="18" height="14" rx="2" />
+                      <path d="m3 7 9 6 9-6" />
+                    </svg>
+                    <div>
+                      <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
+                        Email
+                      </p>
+                      <a
+                        href={`mailto:${email}`}
+                        className="mt-1 block text-base font-medium text-zinc-800 underline-offset-4 transition-colors hover:text-primary hover:underline hover:decoration-primary hover:decoration-2"
+                      >
+                        {email}
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : null}
             </Reveal>
           </div>
         </div>

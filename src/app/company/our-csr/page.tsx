@@ -61,9 +61,11 @@ export default function OurCsrPage() {
               <h1 className="mt-3 max-w-xl text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl">
                 Our CSR
               </h1>
-              <p className="mt-5 max-w-md text-lg leading-relaxed text-zinc-500">
-                Our commitment to the people, communities, and environment
-                connected to the work we do.
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-zinc-600 sm:text-lg">
+                In partnership with Let&apos;s Do It, Fixit Multiconcepts Limited
+                brought its team together on 18 September 2026 for a waste-bin
+                awareness initiative aimed at promoting proper waste disposal,
+                environmental responsibility, and a cleaner environment.
               </p>
               <div className="mt-8 h-px w-16 bg-primary" aria-hidden />
             </Reveal>
@@ -117,29 +119,29 @@ export default function OurCsrPage() {
         className="bg-white px-5 py-16 sm:px-8 sm:py-20"
         aria-label="CSR focus areas"
       >
-        <ul className="site-shell grid gap-5 sm:grid-cols-2">
+        <ul className="site-shell grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
           {pillars.map((pillar, index) => (
             <Reveal
               key={pillar.title}
               as="li"
               variant="up"
-              delay={80 + (index % 2) * 80}
+              delay={80 + index * 70}
             >
               <article className="group flex h-full flex-col overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-100">
-                <div className="relative aspect-[16/9] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={pillar.image}
                     alt={pillar.alt}
                     fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 </div>
-                <div className="flex flex-1 flex-col p-6 sm:p-7">
-                  <h3 className="text-xl font-bold tracking-tight text-zinc-900 transition-colors duration-300 group-hover:text-primary">
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <h3 className="text-lg font-bold tracking-tight text-zinc-900 transition-colors duration-300 group-hover:text-primary lg:text-xl">
                     {pillar.title}
                   </h3>
-                  <p className="mt-3 text-base leading-relaxed text-zinc-600">
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-600 sm:text-base">
                     {pillar.body}
                   </p>
                 </div>

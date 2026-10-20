@@ -83,8 +83,18 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   alt={`${service.title} by FixIt Facility Management`}
                   fill
                   priority
+                  quality={100}
+                  unoptimized={
+                    service.image.includes("landscapping") ||
+                    service.image.includes("water-treatment") ||
+                    service.image.includes("SACM")
+                  }
                   sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="object-cover object-center"
+                  className={
+                    service.imageFit === "contain"
+                      ? "object-contain object-center p-3 sm:p-4"
+                      : "object-cover object-center"
+                  }
                 />
               </div>
             </Reveal>
@@ -114,7 +124,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <aside className="space-y-5 lg:sticky lg:top-28">
             <Reveal variant="up" delay={80}>
               <div className="rounded-2xl bg-zinc-800 p-5 sm:p-6">
-                <h2 className="text-xl font-bold tracking-tight">Categories</h2>
+                <h2 className="text-xl font-bold tracking-tight">
+                  Explore all our services
+                </h2>
                 <ul className="mt-4 space-y-2">
                   {services.map((item) => {
                     const active = item.slug === service.slug;

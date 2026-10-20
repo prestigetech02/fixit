@@ -1,117 +1,229 @@
+"use client";
+
 import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
-import SectionHeader from "@/components/SectionHeader";
 
 const letters = [
   {
     src: "/awards/planet-projects-letter.png",
     alt: "Recommendation letter from Planet Projects Limited for FixIt Multiconcepts",
     label: "Planet Projects Limited",
+    note: "Recommendation for facility management delivery and professional standards.",
+    width: 495,
+    height: 720,
   },
   {
     src: "/awards/oti-letter.png",
     alt: "Recommendation letter from Oshodi Transport Interchange for FixIt Multiconcepts",
     label: "Oshodi Transport Interchange",
+    note: "Endorsement for reliable terminal operations and site stewardship.",
+    width: 508,
+    height: 720,
   },
   {
     src: "/awards/ail-letter.png",
     alt: "Recommendation letter from A.I.L. Infrastructures Limited for FixIt Multiconcepts",
     label: "A.I.L. Infrastructures Limited",
+    note: "Recognition of consistent service quality across infrastructure sites.",
+    width: 560,
+    height: 545,
   },
   {
     src: "/awards/pittol-letter.png",
     alt: "Recommendation letter from Pittol & Company Limited for FixIt Multiconcepts",
     label: "Pittol & Company Limited",
+    note: "Client confidence in FixIt’s people, process, and daily execution.",
+    width: 472,
+    height: 640,
   },
 ] as const;
 
+function ArrowIcon({ direction }: { direction: "prev" | "next" }) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path
+        d={direction === "prev" ? "M13 8H3M7 4L3 8l4 4" : "M3 8h10M9 4l4 4-4 4"}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function ClientFeedback() {
+  const [index, setIndex] = useState(0);
+  const count = letters.length;
+  const letter = letters[index];
+
+  const goTo = useCallback(
+    (next: number) => {
+      setIndex((next + count) % count);
+    },
+    [count],
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) return;
+
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % count);
+    }, 8000);
+
+    return () => window.clearInterval(timer);
+  }, [count]);
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      goTo(index - 1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      goTo(index + 1);
+    }
+  };
+
   return (
     <section
       id="client-feedback"
-      className="bg-white px-5 py-20 sm:px-8 sm:py-24"
+      className="bg-zinc-900 px-5 py-20 text-white sm:px-8 sm:py-24"
       aria-labelledby="feedback-heading"
     >
       <div className="site-shell">
-        <SectionHeader
-          eyebrow="Recognition"
-          title="Client Feedback & Awards"
-          titleId="feedback-heading"
-          eyebrowClassName="text-base font-medium tracking-[0.16em] text-primary uppercase sm:text-lg"
-          titleClassName="mt-3 text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
-          description="FixIt Multiconcepts recently earned the Best Service Provider Award from FIRS, just one year after being awarded the contract, a testament to our dedication, performance, and client satisfaction."
-        />
-
-        <Reveal
-          variant="up"
-          delay={80}
-          className="mt-12 overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-100 lg:mt-14"
-        >
-          <div className="grid items-center lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="relative min-h-[18rem] bg-zinc-200 sm:min-h-[22rem]">
-              <Image
-                src="/awards/firs-best-service-provider-2025.png"
-                alt="FIRS Best Service Provider Contractor Award 2025 presented to FixIt Multi Concept Ltd"
-                fill
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="object-contain object-center p-6 sm:p-8"
-              />
-            </div>
-
-            <div className="px-6 py-8 sm:px-8 sm:py-10 lg:px-10">
-              <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
-                Award Highlight
-              </p>
-              <h3 className="mt-3 text-2xl font-black tracking-tight text-zinc-900 sm:text-3xl">
-                Best Service Provider - Contractor, 2025
-              </h3>
-              <p className="mt-2 text-sm font-semibold text-zinc-700">
-                Federal Inland Revenue Service (FIRS), Lagos Mainland East
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-zinc-600">
-                Presented on 9 October 2025 in recognition of outstanding
-                service at the State Administrator Office, Lagos Mainland East
-                (SAO / LME), just one year after FixIt was awarded the contract.
-              </p>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal variant="up" delay={120} className="mt-12 sm:mt-14">
-          <h3 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-            Client recommendation letters
-          </h3>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-500 sm:text-base">
+        <Reveal variant="up" className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase sm:text-base">
+            Trusted Partners
+          </p>
+          <h2
+            id="feedback-heading"
+            className="mt-3 text-4xl font-black tracking-tight sm:text-5xl lg:text-[3.25rem]"
+          >
+            Client Feedbacks
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">
             Official letters of recommendation from partners who trust FixIt
-            with their facilities.
+            with their facilities day after day.
           </p>
         </Reveal>
 
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-          {letters.map((letter, index) => (
-            <Reveal
-              key={letter.src}
-              as="li"
-              variant="up"
-              delay={140 + index * 70}
-            >
-              <figure className="overflow-hidden rounded-[20px_4px_20px_4px] border border-zinc-200 bg-zinc-50">
-                <div className="relative aspect-[3/4] w-full bg-white">
-                  <Image
-                    src={letter.src}
-                    alt={letter.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-contain object-top p-2 sm:p-3"
-                  />
+        <Reveal variant="up" delay={100} className="mt-12 sm:mt-14">
+          <div
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Client recommendation letters"
+            tabIndex={0}
+            onKeyDown={onKeyDown}
+            className="outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900"
+          >
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch lg:gap-12">
+              {/* Featured letter — intrinsic size, no forced crop */}
+              <div className="flex min-h-[22rem] items-center justify-center overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-800 p-5 sm:min-h-[28rem] sm:p-8">
+                <div className="relative flex w-full items-center justify-center">
+                  {letters.map((item, i) => (
+                    <div
+                      key={item.src}
+                      role="group"
+                      aria-roledescription="slide"
+                      aria-label={`${i + 1} of ${count}: ${item.label}`}
+                      aria-hidden={i !== index}
+                      className={[
+                        "transition-opacity duration-500 ease-out motion-reduce:transition-none",
+                        i === index
+                          ? "relative opacity-100"
+                          : "pointer-events-none absolute inset-0 flex items-center justify-center opacity-0",
+                      ].join(" ")}
+                    >
+                      <Image
+                        src={item.src}
+                        alt={item.alt}
+                        width={item.width}
+                        height={item.height}
+                        unoptimized
+                        priority={i === 0}
+                        className="h-auto max-h-[36rem] w-auto max-w-full object-contain"
+                      />
+                    </div>
+                  ))}
                 </div>
-                <figcaption className="border-t border-zinc-200 px-3 py-3 text-xs font-semibold leading-snug text-zinc-800 sm:text-sm">
-                  {letter.label}
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </ul>
+              </div>
+
+              {/* Partner switcher */}
+              <div className="flex flex-col justify-between">
+                <div>
+                  <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
+                    Recommendation letter
+                  </p>
+                  <h3 className="mt-3 text-2xl font-black tracking-tight sm:text-3xl">
+                    {letter.label}
+                  </h3>
+                  <p className="mt-4 text-base leading-relaxed text-zinc-400">
+                    {letter.note}
+                  </p>
+
+                  <ol className="mt-10 space-y-1 border-t border-white/10 pt-6">
+                    {letters.map((item, i) => {
+                      const active = i === index;
+                      return (
+                        <li key={item.src}>
+                          <button
+                            type="button"
+                            onClick={() => goTo(i)}
+                            aria-current={active}
+                            className={[
+                              "group flex w-full items-center gap-4 rounded-sm px-3 py-3.5 text-left transition-colors",
+                              active
+                                ? "bg-primary text-white"
+                                : "text-zinc-300 hover:bg-white/5 hover:text-white",
+                            ].join(" ")}
+                          >
+                            <span
+                              className={[
+                                "w-7 shrink-0 text-xs font-semibold tracking-[0.16em]",
+                                active ? "text-white/80" : "text-zinc-500",
+                              ].join(" ")}
+                            >
+                              {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <span className="text-sm font-semibold sm:text-base">
+                              {item.label}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </div>
+
+                <div className="mt-8 flex items-center justify-between gap-4 border-t border-white/10 pt-6">
+                  <p className="text-sm text-zinc-500">
+                    {index + 1} / {count}
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => goTo(index - 1)}
+                      aria-label="Previous letter"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-white/20 text-white transition-colors hover:border-primary hover:bg-primary"
+                    >
+                      <ArrowIcon direction="prev" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => goTo(index + 1)}
+                      aria-label="Next letter"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-white/20 text-white transition-colors hover:border-primary hover:bg-primary"
+                    >
+                      <ArrowIcon direction="next" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

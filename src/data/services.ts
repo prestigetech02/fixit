@@ -3,6 +3,8 @@ export type Service = {
   title: string;
   heading: string;
   image: string;
+  /** How the image fills its frame. Defaults to cover. */
+  imageFit?: "cover" | "contain";
   summary: string;
   writeup: string[];
 };
@@ -24,7 +26,7 @@ export const services: Service[] = [
     slug: "landscaping-beautification",
     title: "Landscaping & Beautification",
     heading: "Grounds that make a strong first impression.",
-    image: "/services/landscaping.jpg",
+    image: "/services/landscapping.jpeg",
     summary:
       "Outdoor grounds care and beautification that strengthen first impressions and keep facility exteriors well maintained.",
     writeup: [
@@ -36,7 +38,7 @@ export const services: Service[] = [
     slug: "security-access-control",
     title: "Security and Access Control Management",
     heading: "Controlled access. Confident operations.",
-    image: "/services/security.jpg",
+    image: "/services/SACM.jpeg",
     summary:
       "Access control and security coordination that protect people, assets, and orderly movement across your facilities.",
     writeup: [
@@ -72,7 +74,8 @@ export const services: Service[] = [
     slug: "water-treatment",
     title: "Water Treatment",
     heading: "Protected systems. Dependable water quality.",
-    image: "/services/water.jpg",
+    image: "/services/water-treatment.jpeg",
+    imageFit: "contain",
     summary:
       "Water treatment support that protects system performance, water quality, and dependable facility operations.",
     writeup: [

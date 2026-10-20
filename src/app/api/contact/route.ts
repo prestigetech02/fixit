@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       "",
       `Name: ${name}`,
       `Email: ${email}`,
-      `Phone: ${phone || "—"}`,
+      `Phone: ${phone || "-"}`,
       `Subject: ${subject}`,
       "",
       "Message:",

@@ -62,7 +62,7 @@ function AnimatedNumber({
     }
 
     let frame = 0;
-    const duration = 1100;
+    const duration = 2400;
     const start = performance.now();
 
     const tick = (now: number) => {
