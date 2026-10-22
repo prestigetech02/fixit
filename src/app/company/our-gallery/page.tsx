@@ -50,8 +50,8 @@ export default function OurGalleryPage() {
             className="relative min-h-[18rem] sm:min-h-[22rem] lg:min-h-[28rem]"
           >
             <Image
-              src="/brand/105.png"
-              alt="FixIt operator using a ride-on floor scrubber on a pedestrian bridge"
+              src="/hero/gallery-hero.JPG"
+              alt="Two FixIt technicians in hard hats standing with wrenches in front of yellow site equipment"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
