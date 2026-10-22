@@ -6,6 +6,29 @@ export type GalleryImage = {
   caption: string;
 };
 
+const nrs: GalleryImage[] = [
+  {
+    src: "/projects/nrs1.jpeg",
+    alt: "FixIt team lined up beside the Nigeria Revenue Service wall logo",
+    caption: "NRS team",
+  },
+  {
+    src: "/projects/nrs2.jpeg",
+    alt: "FixIt team gathered in the Nigeria Revenue Service lobby",
+    caption: "NRS lobby",
+  },
+  {
+    src: "/projects/nrs3.jpeg",
+    alt: "FixIt team seated in the Nigeria Revenue Service auditorium",
+    caption: "NRS auditorium",
+  },
+  {
+    src: "/projects/nrs4.jpeg",
+    alt: "FixIt team standing along the Nigeria Revenue Service branded wall",
+    caption: "NRS on site",
+  },
+];
+
 const operations: GalleryImage[] = [
   {
     src: "/hero/slide-1.png",
@@ -70,4 +93,4 @@ const sites: GalleryImage[] = projects.map((project) => ({
   caption: project.name,
 }));
 
-export const galleryImages: GalleryImage[] = [...operations, ...sites];
+export const galleryImages: GalleryImage[] = [...nrs, ...operations, ...sites];
