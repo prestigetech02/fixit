@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     // Prefer sharper output; default Next quality is 75.
-    qualities: [75, 90, 95],
+    qualities: [75, 90, 95, 100],
     // Serve larger variants on wide / retina screens.
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512],

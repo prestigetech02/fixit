@@ -100,7 +100,7 @@ export default function Hero() {
                 fill
                 priority={i === 0}
                 quality={100}
-                unoptimized={/slide-[12]\.JPG$/i.test(slide.src)}
+                unoptimized
                 sizes="100vw"
                 className={`h-full w-full object-cover ${slide.position}`}
               />
