@@ -82,6 +82,7 @@ export default function WhyChooseFixIt() {
                 alt="FixIt facility team in uniform at a transport terminal"
                 fill
                 quality={90}
+                unoptimized
                 sizes="(max-width: 1024px) 70vw, 40vw"
                 className="object-cover object-center"
               />

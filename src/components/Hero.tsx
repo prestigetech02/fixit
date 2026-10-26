@@ -131,19 +131,19 @@ export default function Hero() {
         >
           <div
             className={[
-              "flex w-full max-w-2xl flex-col xl:max-w-3xl",
+              "flex w-full min-w-0 max-w-2xl flex-col xl:max-w-3xl",
               textRight ? "items-end" : "items-start",
             ].join(" ")}
           >
             <h1
               key={`heading-${step}`}
-              className="mt-4 text-4xl font-black leading-[1.08] tracking-tight text-white sm:mt-6 sm:text-5xl md:text-6xl lg:text-[62px] 2xl:text-[68px]"
+              className="mt-4 w-full min-w-0 text-3xl font-black leading-[1.08] tracking-tight text-white sm:mt-6 sm:text-4xl md:text-5xl lg:text-[62px] 2xl:text-[68px]"
             >
               {active.heading.map((line, i) => (
                 <Fragment key={line}>
                   <span className="block overflow-hidden pb-[0.06em]">
                     <span
-                      className="hero-line inline-block whitespace-nowrap"
+                      className="hero-line inline-block max-w-full whitespace-normal xl:whitespace-nowrap"
                       style={{ animationDelay: `${textDelay + i * 110}ms` }}
                     >
                       {line}

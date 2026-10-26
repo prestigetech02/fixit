@@ -107,6 +107,7 @@ export default function OurManagementPage() {
               fill
               priority
               quality={90}
+              unoptimized
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover object-top"
             />
@@ -283,6 +284,7 @@ export default function OurManagementPage() {
               alt="FixIt staff with floor-care equipment on a terminal walkway"
               fill
               quality={90}
+              unoptimized
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover object-[center_20%]"
             />

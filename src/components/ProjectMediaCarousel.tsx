@@ -123,6 +123,7 @@ export default function ProjectMediaCarousel({
                     fill
                     priority={i === 0}
                     quality={90}
+                    unoptimized={item.src === "/hero/team.JPG"}
                     sizes="(max-width: 1152px) 100vw, 1600px"
                     className={`object-cover object-center transition-transform duration-[1200ms] ease-out ${
                       isActive ? "scale-100" : "scale-105"

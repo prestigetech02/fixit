@@ -54,6 +54,7 @@ export default function OurGalleryPage() {
               alt="Two FixIt technicians in hard hats standing with wrenches in front of yellow site equipment"
               fill
               priority
+              unoptimized
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover object-center"
             />
