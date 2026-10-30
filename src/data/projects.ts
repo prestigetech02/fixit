@@ -281,6 +281,26 @@ const allProjects: Project[] = [
     ],
   },
   {
+    slug: "cbd-bus-terminal",
+    name: "CBD Bus Terminal",
+    location: "Abuja, FCT",
+    status: "ongoing",
+    category: "Transport terminal",
+    image: "/projects/cbd-bus-terminal.jpg",
+    summary:
+      "Facility care at Abuja’s modern Central Business District Bus Terminal behind Eagle Square, organising intra-city and regional public transport.",
+    description: [
+      "The Central Business District (CBD) Bus Terminal in Abuja is a modern, multi-level transit facility located directly behind Eagle Square. Developed by Planet Projects Limited under the Federal Capital Territory Administration (FCTA), it is designed to organise intra-city and regional public transport, replace chaotic roadside loading, and integrate with future underground light rail lines.",
+      "The project was completed in 2025. FixIt provides ongoing facility management support so the terminal stays clean, orderly and ready for daily passenger operations.",
+    ],
+    highlights: [
+      { label: "Developer", value: "Planet Projects / FCTA" },
+      { label: "Completed", value: "2025" },
+      { label: "Location", value: "Behind Eagle Square" },
+    ],
+    scope: terminalScope,
+  },
+  {
     slug: "mabushi-bus-terminal",
     name: "Mabushi Bus Terminal",
     location: "Abuja, FCT",
