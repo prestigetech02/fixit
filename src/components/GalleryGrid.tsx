@@ -52,7 +52,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
               type="button"
               onClick={() => setActive(index)}
               className="group relative block aspect-[4/3] w-full overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              aria-label={`View larger: ${image.caption}`}
+              aria-label={`View larger: ${image.alt}`}
             >
               <Image
                 src={image.src}
@@ -62,13 +62,6 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
                 sizes="(max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <span
-                className="absolute inset-0 bg-gradient-to-t from-deep-blue-black/75 via-transparent to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"
-                aria-hidden
-              />
-              <span className="absolute inset-x-0 bottom-0 p-3 text-left text-sm font-semibold text-white sm:p-4 sm:text-base">
-                {image.caption}
-              </span>
             </button>
           </li>
         ))}
@@ -78,7 +71,7 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={current.caption}
+          aria-label={current.alt}
           className="fixed inset-0 z-[90] flex items-center justify-center bg-deep-blue-black/90 p-4 sm:p-8"
           onClick={close}
         >
@@ -98,11 +91,8 @@ export default function GalleryGrid({ images }: GalleryGridProps) {
               />
             </div>
             <div className="mt-4 flex items-center justify-between gap-4 text-white">
-              <p className="text-sm font-semibold sm:text-base">
-                {current.caption}
-                <span className="ml-3 font-normal text-white/60">
-                  {(active ?? 0) + 1} / {images.length}
-                </span>
+              <p className="text-sm text-white/60">
+                {(active ?? 0) + 1} / {images.length}
               </p>
               <div className="flex items-center gap-2">
                 <button

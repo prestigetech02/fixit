@@ -79,8 +79,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         ])}
       />
 
-      {/* Title and media */}
-      <section className="px-5 pb-12 pt-28 sm:px-8 sm:pb-14 sm:pt-32">
+      {/* Title, media, write-up, and facts */}
+      <section
+        className="px-5 pb-16 pt-28 sm:px-8 sm:pb-20 sm:pt-32"
+        aria-labelledby="about-project-heading"
+      >
         <div className="site-shell">
           <Link
             href={`/our-projects#${project.status}-projects`}
@@ -113,100 +116,99 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </p>
           </Reveal>
 
-          <Reveal variant="fade" delay={120} className="mt-10">
-            <ProjectMediaCarousel
-              media={media}
-              label={`${project.name} photos and videos`}
-            />
-          </Reveal>
-        </div>
-      </section>
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1.35fr_0.85fr] lg:items-start lg:gap-12">
+            <div className="min-w-0">
+              <Reveal variant="fade" delay={80}>
+                <ProjectMediaCarousel
+                  media={media}
+                  label={`${project.name} photos and videos`}
+                />
+              </Reveal>
 
-      {/* Write-up */}
-      <section
-        className="px-5 pb-16 sm:px-8 sm:pb-20"
-        aria-labelledby="about-project-heading"
-      >
-        <div className="site-shell grid gap-10 lg:grid-cols-[1.45fr_0.9fr] lg:items-start lg:gap-14">
-          <Reveal variant="up">
-            <h2
-              id="about-project-heading"
-              className="text-2xl font-black tracking-tight text-zinc-900 sm:text-3xl"
-            >
-              About the Project
-            </h2>
-            <div className="mt-5 space-y-4 text-base leading-relaxed text-zinc-600 sm:text-lg">
-              {project.description.map((paragraph) => (
-                <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-              ))}
+              <Reveal variant="up" delay={120} className="mt-10">
+                <h2
+                  id="about-project-heading"
+                  className="text-2xl font-black tracking-tight text-zinc-900 sm:text-3xl"
+                >
+                  About the Project
+                </h2>
+                <div className="mt-5 space-y-4 text-base leading-relaxed text-zinc-600 sm:text-lg">
+                  {project.description.map((paragraph) => (
+                    <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                  ))}
+                </div>
+
+                <h3 className="mt-10 text-lg font-bold tracking-tight text-zinc-900">
+                  Scope of Work
+                </h3>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {project.scope.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-[0.9375rem] text-zinc-700"
+                    >
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden>
+                          <path
+                            d="M2.5 6.5 5 9l4.5-6"
+                            stroke="currentColor"
+                            strokeWidth="1.75"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
             </div>
 
-            <h3 className="mt-10 text-lg font-bold tracking-tight text-zinc-900">
-              Scope of Work
-            </h3>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {project.scope.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 text-[0.9375rem] text-zinc-700"
+            <Reveal variant="up" delay={100} className="lg:sticky lg:top-28">
+              <aside className="rounded-[20px_4px_20px_4px] bg-zinc-100 p-6 sm:p-7">
+                <h2 className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
+                  Project Facts
+                </h2>
+                <dl className="mt-4 divide-y divide-zinc-200">
+                  {facts.map((fact) => (
+                    <div
+                      key={fact.label}
+                      className="flex items-baseline justify-between gap-4 py-3"
+                    >
+                      <dt className="text-sm text-zinc-500">{fact.label}</dt>
+                      <dd className="text-right text-sm font-semibold text-zinc-900">
+                        {fact.value}
+                      </dd>
+                    </div>
+                  ))}
+                  {manager ? (
+                    <div className="flex items-baseline justify-between gap-4 py-3">
+                      <dt className="text-sm text-zinc-500">Facility manager</dt>
+                      <dd className="text-right text-sm font-semibold">
+                        <Link
+                          href={getTeamMemberHref(manager.slug)}
+                          className="text-zinc-900 underline-offset-4 transition-colors hover:text-primary hover:underline"
+                        >
+                          {manager.name}
+                        </Link>
+                      </dd>
+                    </div>
+                  ) : null}
+                </dl>
+
+                <p className="mt-6 text-sm leading-relaxed text-zinc-600">
+                  Need the same standard of care for your facility?
+                </p>
+                <Button
+                  href="/request-a-quote"
+                  className="mt-4 w-full justify-center px-6 py-3"
                 >
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden>
-                      <path
-                        d="M2.5 6.5 5 9l4.5-6"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-
-          <Reveal variant="up" delay={100} className="lg:sticky lg:top-28">
-            <aside className="rounded-[20px_4px_20px_4px] bg-zinc-100 p-6 sm:p-7">
-              <h2 className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">
-                Project Facts
-              </h2>
-              <dl className="mt-4 divide-y divide-zinc-200">
-                {facts.map((fact) => (
-                  <div
-                    key={fact.label}
-                    className="flex items-baseline justify-between gap-4 py-3"
-                  >
-                    <dt className="text-sm text-zinc-500">{fact.label}</dt>
-                    <dd className="text-right text-sm font-semibold text-zinc-900">
-                      {fact.value}
-                    </dd>
-                  </div>
-                ))}
-                {manager ? (
-                  <div className="flex items-baseline justify-between gap-4 py-3">
-                    <dt className="text-sm text-zinc-500">Facility manager</dt>
-                    <dd className="text-right text-sm font-semibold">
-                      <Link
-                        href={getTeamMemberHref(manager.slug)}
-                        className="text-zinc-900 underline-offset-4 transition-colors hover:text-primary hover:underline"
-                      >
-                        {manager.name}
-                      </Link>
-                    </dd>
-                  </div>
-                ) : null}
-              </dl>
-
-              <p className="mt-6 text-sm leading-relaxed text-zinc-600">
-                Need the same standard of care for your facility?
-              </p>
-              <Button href="/request-a-quote" className="mt-4 w-full justify-center px-6 py-3">
-                Request a Quote
-              </Button>
-            </aside>
-          </Reveal>
+                  Request a Quote
+                </Button>
+              </aside>
+            </Reveal>
+          </div>
         </div>
       </section>
 

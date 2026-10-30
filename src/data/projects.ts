@@ -54,7 +54,7 @@ const allProjects: Project[] = [
     slug: "ikeja-bus-terminal",
     name: "Ikeja Bus Terminal",
     location: "Lagos",
-    status: "ongoing",
+    status: "completed",
     category: "Transport terminal",
     image: "/brand/55.png",
     summary:
@@ -255,7 +255,7 @@ const allProjects: Project[] = [
     location: "Enugu State",
     status: "completed",
     category: "Transport terminals",
-    image: "/brand/enugu-terminal.png",
+    image: "/projects/enugu-gariki.png",
     summary:
       "Clean, orderly passenger environments across four Enugu terminals handling over 14,000 commuters daily.",
     description: [
@@ -267,12 +267,24 @@ const allProjects: Project[] = [
       { label: "Terminals", value: "4" },
     ],
     scope: terminalScope,
+    media: [
+      {
+        type: "image",
+        src: "/projects/enugu-abakpa.png",
+        alt: "Abakpa Bus Terminal exterior in Enugu State",
+      },
+      {
+        type: "image",
+        src: "/projects/enugu-holy-ghost.png",
+        alt: "Holy Ghost Bus Terminal 2 aerial view in Enugu State",
+      },
+    ],
   },
   {
     slug: "mabushi-bus-terminal",
     name: "Mabushi Bus Terminal",
     location: "Abuja, FCT",
-    status: "completed",
+    status: "ongoing",
     category: "Transport terminal",
     image: "/brand/mabushi-terminal.png",
     summary:
@@ -288,7 +300,7 @@ const allProjects: Project[] = [
     slug: "nrs-lagos-buildings",
     name: "NRS Lagos Buildings - 10 Stations",
     location: "Lagos",
-    status: "completed",
+    status: "ongoing",
     category: "Commercial buildings",
     image: "/brand/nrs-lagos.png",
     summary:
@@ -307,7 +319,7 @@ const allProjects: Project[] = [
     slug: "planet-project-limited",
     name: "Planet Project Limited",
     location: "Lagos",
-    status: "completed",
+    status: "ongoing",
     category: "Corporate offices",
     image: "/brand/planet-project.png",
     summary:
@@ -323,7 +335,7 @@ const allProjects: Project[] = [
     slug: "galaxy-backbone",
     name: "Galaxy Backbone Ltd",
     location: "Abuja, FCT",
-    status: "completed",
+    status: "ongoing",
     category: "Corporate headquarters",
     image: "/brand/galaxy-backbone.png",
     summary:

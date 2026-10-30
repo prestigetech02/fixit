@@ -27,7 +27,8 @@ export default function ServiceCard({
   const preserveQuality =
     image.includes("landscapping") ||
     image.includes("water-treatment") ||
-    image.includes("SACM");
+    image.includes("SACM") ||
+    image.includes("custodial-hygiene");
 
   return (
     <article

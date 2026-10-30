@@ -79,7 +79,7 @@ export const team: TeamMember[] = [
     slug: "victor-chukwuemeka",
     name: "Victor Chukwuemeka",
     role: "Facility Manager, North Central",
-    image: "/team/victor-chukwuemeka.jpg",
+    image: "/team/victor-chukwuemeka-2.jpg",
     email: "",
     bio: [
       "Victor Chukwuemeka is a Facility Manager at FixIt Multiconcepts Ltd, with practical experience in facility operations, team coordination, service delivery, maintenance supervision and operational management.",
@@ -102,7 +102,7 @@ export const team: TeamMember[] = [
     slug: "miracle-eke-amogu",
     name: "Miracle Eke Amogu",
     role: "Facility Manager, Southeast",
-    image: "/team/miracle-eke-amogu.jpg",
+    image: "/team/miracle-eke-amogu-2.jpg",
     email: "",
     bio: [
       "Miracle Eke Amogu, from Asaga, Ohafia in Abia State, is a Mechanical and Technical Engineering professional with six years of hands-on experience in mechanical systems, technical operations and facility management. He serves as Facility Manager at FixIt Multiconcepts Ltd for the Nnenna Oti Bus Terminal, Umuahia, where he oversees facility operations and ensures efficient service delivery.",
@@ -113,11 +113,22 @@ export const team: TeamMember[] = [
     slug: "micheal-adewale-hanz",
     name: "Micheal Adewale Hanz",
     role: "Facility Manager, Southwest",
-    image: "/team/micheal-adewale.jpg",
+    image: "/team/micheal-adewale-2.jpg",
     email: "",
     bio: [
       "Micheal Adewale Hanz is a committed Facility Manager at FixIt Multiconcepts Ltd, overseeing the overall management, operations and maintenance of Oshodi Bus Terminal. He is experienced in staff supervision and welfare, safety and security, cleanliness and sanitation, infrastructure maintenance, and enforcement of operational standards.",
       "He is committed to smooth and efficient day-to-day operations, maintaining a safe, clean, well-organised and fully functional terminal environment that meets required service and operational standards.",
+    ],
+  },
+  {
+    slug: "morgan-godspower",
+    name: "Morgan Godspower",
+    role: "Facility Manager, Southwest",
+    image: "/team/morgan-godspower.jpg",
+    email: "",
+    bio: [
+      "Morgan Godspower is a Facility Manager at FixIt Multiconcepts Ltd for the Southwest region. He oversees daily facility operations, service delivery, and on-site team coordination to keep client spaces clean, safe, and well maintained.",
+      "He is committed to professionalism, operational standards, and consistent service quality across the facilities under his care.",
     ],
   },
 ];

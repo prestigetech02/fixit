@@ -16,8 +16,8 @@ export const metadata: Metadata = buildPageMetadata({
 const pillars = [
   {
     title: "Community",
-    image: "/brand/107.png",
-    alt: "FixIt team clearing waste at a public site",
+    image: "/csr/csr-hero.jpg",
+    alt: "FixIt Multiconcepts team carrying out a community waste and sanitation cleanup",
     body: "We support the communities around the facilities we manage, with a focus on cleaner, safer public spaces that everyone can use with confidence.",
   },
   {
@@ -78,12 +78,13 @@ export default function OurCsrPage() {
           >
             <Image
               src="/csr/csr-hero.jpg"
-              alt="FixIt staff with partners and volunteers at a community sanitation event"
+              alt="FixIt Multiconcepts team carrying out a community waste and sanitation cleanup"
               fill
               priority
-              quality={90}
+              quality={100}
+              unoptimized
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-[center_40%]"
+              className="object-cover object-center"
             />
             <div
               className="absolute inset-0 bg-deep-blue-black/10"

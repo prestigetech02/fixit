@@ -14,7 +14,7 @@ export const services: Service[] = [
     slug: "custodial-environmental-hygiene",
     title: "Custodial and Environmental Hygiene",
     heading: "Clean spaces. Healthier facilities.",
-    image: "/services/custodial.png",
+    image: "/services/custodial-hygiene.jpg",
     summary:
       "Professional cleaning and hygiene programmes that keep public and commercial spaces safe, presentable, and ready for daily use.",
     writeup: [

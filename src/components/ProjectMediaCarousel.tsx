@@ -95,7 +95,7 @@ export default function ProjectMediaCarousel({
       className="outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
     >
       <div
-        className="relative aspect-[4/3] overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-900 sm:aspect-[16/9]"
+        className="relative aspect-[4/3] overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-900 sm:aspect-[3/2]"
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerCancel={() => (pointerStart.current = null)}

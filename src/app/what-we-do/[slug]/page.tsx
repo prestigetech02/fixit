@@ -87,7 +87,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   unoptimized={
                     service.image.includes("landscapping") ||
                     service.image.includes("water-treatment") ||
-                    service.image.includes("SACM")
+                    service.image.includes("SACM") ||
+                    service.image.includes("custodial-hygiene")
                   }
                   sizes="(max-width: 1024px) 100vw, 60vw"
                   className={

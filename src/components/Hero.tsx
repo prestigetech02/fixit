@@ -137,13 +137,13 @@ export default function Hero() {
           >
             <h1
               key={`heading-${step}`}
-              className="mt-4 w-full min-w-0 text-3xl font-black leading-[1.08] tracking-tight text-white sm:mt-6 sm:text-4xl md:text-5xl lg:text-[62px] 2xl:text-[68px]"
+              className="mt-4 w-full min-w-0 text-balance text-3xl font-black leading-[1.12] tracking-tight text-white sm:mt-6 sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] 2xl:text-[4rem]"
             >
               {active.heading.map((line, i) => (
                 <Fragment key={line}>
-                  <span className="block overflow-hidden pb-[0.06em]">
+                  <span className="block overflow-x-clip overflow-y-hidden pb-[0.08em]">
                     <span
-                      className="hero-line inline-block max-w-full whitespace-normal xl:whitespace-nowrap"
+                      className="hero-line inline-block max-w-full whitespace-normal break-words"
                       style={{ animationDelay: `${textDelay + i * 110}ms` }}
                     >
                       {line}
@@ -155,7 +155,7 @@ export default function Hero() {
 
             <p
               key={`sub-${step}`}
-              className="hero-soft-up mt-6 max-w-xl text-lg font-medium leading-relaxed text-white/85 sm:text-xl md:text-2xl"
+              className="hero-soft-up mt-6 w-full max-w-xl text-pretty text-lg font-medium leading-relaxed text-white/85 sm:text-xl md:text-2xl"
               style={{
                 animationDelay: `${textDelay + active.heading.length * 110 + 120}ms`,
               }}
