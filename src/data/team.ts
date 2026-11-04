@@ -16,7 +16,7 @@ export const team: TeamMember[] = [
     name: "Temilade Fashesin",
     role: "General Manager",
     image: "/team/member-1.png",
-    email: "gm@fixitmulticoncepts.com",
+    email: "temi.fashesin@fixitmulticoncepts.com",
     bio: [
       "Temilade Fashesin brings 14 years of experience in operations, project delivery and business management across facilities management, healthcare, manufacturing, real estate and technology. At FixIt Multiconcepts, she leads the systems and teams that keep complex, multi-site operations running effectively.",
     ],

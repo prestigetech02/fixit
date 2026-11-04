@@ -1,12 +1,12 @@
-import { Resend } from "resend";
-import { siteConfig } from "@/lib/seo";
-
-const resendApiKey = process.env.RESEND_API_KEY;
+const zeptoToken = process.env.ZEPTOMAIL_TOKEN;
+const zeptoApiUrl =
+  process.env.ZEPTOMAIL_API_URL ?? "https://api.zeptomail.com/v1.1/email";
+const bounceAddress = process.env.ZEPTOMAIL_BOUNCE_ADDRESS;
 const toEmail =
-  process.env.CONTACT_TO_EMAIL ?? siteConfig.email;
+  process.env.CONTACT_TO_EMAIL ?? "operations@fixitmulticoncepts.com";
 const fromEmail =
   process.env.CONTACT_FROM_EMAIL ??
-  "FixIt Website <onboarding@resend.dev>";
+  "FixIt Website <noreply@fixitmulticoncepts.com>";
 
 export type MailPayload = {
   subject: string;
@@ -15,30 +15,83 @@ export type MailPayload = {
   text: string;
 };
 
+function parseAddress(value: string): { address: string; name?: string } {
+  const match = value.match(/^(.*?)\s*<([^>]+)>$/);
+  if (match) {
+    return { name: match[1].trim() || undefined, address: match[2].trim() };
+  }
+  return { address: value.trim() };
+}
+
 export function isMailConfigured() {
-  return Boolean(resendApiKey);
+  return Boolean(zeptoToken);
 }
 
 export async function sendLeadEmail(payload: MailPayload) {
-  if (!resendApiKey) {
-    throw new Error("RESEND_API_KEY is not configured");
+  if (!zeptoToken) {
+    throw new Error("ZEPTOMAIL_TOKEN is not configured");
   }
 
-  const resend = new Resend(resendApiKey);
-  const result = await resend.emails.send({
-    from: fromEmail,
-    to: [toEmail],
-    replyTo: payload.replyTo,
+  const from = parseAddress(fromEmail);
+  const replyTo = parseAddress(payload.replyTo);
+
+  const body: Record<string, unknown> = {
+    from: {
+      address: from.address,
+      ...(from.name ? { name: from.name } : {}),
+    },
+    to: [
+      {
+        email_address: {
+          address: toEmail,
+        },
+      },
+    ],
+    reply_to: [
+      {
+        address: replyTo.address,
+        ...(replyTo.name ? { name: replyTo.name } : {}),
+      },
+    ],
     subject: payload.subject,
-    html: payload.html,
-    text: payload.text,
+    htmlbody: payload.html,
+    textbody: payload.text,
+  };
+
+  if (bounceAddress) {
+    body.bounce_address = bounceAddress;
+  }
+
+  const response = await fetch(zeptoApiUrl, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Zoho-enczapikey ${zeptoToken}`,
+    },
+    body: JSON.stringify(body),
   });
 
-  if (result.error) {
-    throw new Error(result.error.message);
+  const result = (await response.json().catch(() => null)) as
+    | {
+        data?: unknown;
+        message?: string;
+        error?: { message?: string; code?: string };
+        error_code?: string | number;
+        error_message?: string;
+      }
+    | null;
+
+  if (!response.ok) {
+    const message =
+      result?.error?.message ||
+      result?.error_message ||
+      result?.message ||
+      `ZeptoMail request failed (${response.status})`;
+    throw new Error(message);
   }
 
-  return result.data;
+  return result?.data ?? result;
 }
 
 export function escapeHtml(value: string) {

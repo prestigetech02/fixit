@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "Email is not configured yet. Add RESEND_API_KEY on the server.",
+            "Email is not configured yet. Add ZEPTOMAIL_TOKEN on the server.",
         },
         { status: 503 },
       );
