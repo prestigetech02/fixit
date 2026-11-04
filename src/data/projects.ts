@@ -105,7 +105,7 @@ const allProjects: Project[] = [
       },
       {
         type: "image",
-        src: "/hero/team.JPG",
+        src: "/hero/team.jpg",
         alt: "FixIt cleaning and maintenance team in uniform on site",
       },
     ],

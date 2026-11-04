@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import CsrHeroSlider from "@/components/CsrHeroSlider";
 import CtaBand from "@/components/CtaBand";
 import JsonLdScript from "@/components/JsonLdScript";
 import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/SectionHeader";
 import { breadcrumbJsonLd } from "@/lib/json-ld";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -76,20 +78,7 @@ export default function OurCsrPage() {
             delay={120}
             className="relative min-h-[18rem] sm:min-h-[22rem] lg:min-h-[28rem]"
           >
-            <Image
-              src="/csr/csr-hero.jpg"
-              alt="FixIt Multiconcepts team carrying out a community waste and sanitation cleanup"
-              fill
-              priority
-              quality={100}
-              unoptimized
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
-            />
-            <div
-              className="absolute inset-0 bg-deep-blue-black/10"
-              aria-hidden
-            />
+            <CsrHeroSlider />
           </Reveal>
         </div>
       </section>
@@ -115,11 +104,74 @@ export default function OurCsrPage() {
         </Reveal>
       </section>
 
+      {/* Bin Awareness Day */}
+      <section
+        className="bg-white px-5 pt-14 sm:px-8 sm:pt-16"
+        aria-labelledby="bin-awareness-heading"
+      >
+        <div className="site-shell grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <Reveal variant="fade">
+            <div
+              className="grid grid-cols-2 gap-2.5 sm:gap-3"
+              aria-label="Bin Awareness Day photos"
+            >
+              <div className="relative aspect-square overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-200">
+                <Image
+                  src="/csr/bin-awareness-1.jpg"
+                  alt="FixIt team member posing with an Instagram-style photo frame on Bin Awareness Day"
+                  fill
+                  quality={100}
+                  unoptimized
+                  sizes="(max-width: 1024px) 50vw, 28vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="relative aspect-square overflow-hidden rounded-[20px_4px_20px_4px] bg-zinc-200">
+                <Image
+                  src="/csr/bin-awareness-2.jpg"
+                  alt="FixIt team member holding a World Cleanup Day frame on Bin Awareness Day"
+                  fill
+                  quality={100}
+                  unoptimized
+                  sizes="(max-width: 1024px) 50vw, 28vw"
+                  className="object-cover object-center"
+                />
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal variant="up" delay={100}>
+            <p className="text-sm font-medium tracking-[0.16em] text-primary uppercase">
+              Initiative
+            </p>
+            <h2
+              id="bin-awareness-heading"
+              className="mt-3 text-3xl font-black tracking-tight text-zinc-900 sm:text-4xl"
+            >
+              Bin Awareness Day
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-zinc-600 sm:text-lg">
+              On 18 September 2026, FixIt Multiconcepts partnered with Let&apos;s
+              Do It for a waste-bin awareness initiative. Our team came together
+              to promote proper waste disposal, environmental responsibility, and
+              a cleaner environment across the communities we serve.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Pillars */}
       <section
         className="bg-white px-5 py-16 sm:px-8 sm:py-20"
-        aria-label="CSR focus areas"
+        aria-labelledby="csr-pillars-heading"
       >
+        <SectionHeader
+          eyebrow="Impact"
+          title="Our Focus Areas"
+          titleId="csr-pillars-heading"
+          description="Four priorities that guide how we give back across the communities and facilities we serve."
+          className="mx-auto mb-12 max-w-2xl flex-col items-center text-center sm:mb-14"
+        />
         <ul className="site-shell grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
           {pillars.map((pillar, index) => (
             <Reveal

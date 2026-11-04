@@ -78,7 +78,7 @@ export default function WhyChooseFixIt() {
           <div className="relative mx-auto aspect-[3/4] w-[78%] rounded-sm border border-primary p-2.5 sm:w-[72%] sm:p-3 lg:w-[70%]">
             <div className="relative h-full w-full overflow-hidden rounded-sm bg-zinc-200">
               <Image
-                src="/hero/team.JPG"
+                src="/hero/team.jpg"
                 alt="FixIt facility team in uniform at a transport terminal"
                 fill
                 quality={90}

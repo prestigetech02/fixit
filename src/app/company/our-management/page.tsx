@@ -102,7 +102,7 @@ export default function OurManagementPage() {
             className="relative min-h-[18rem] sm:min-h-[22rem] lg:min-h-[28rem]"
           >
             <Image
-              src="/hero/team.JPG"
+              src="/hero/team.jpg"
               alt="FixIt facility team in uniform"
               fill
               priority

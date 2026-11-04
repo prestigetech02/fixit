@@ -58,7 +58,7 @@ export const team: TeamMember[] = [
     slug: "adebowale-precious-adesanmi",
     name: "Adebowale Precious Adesanmi",
     role: "Business Development Officer",
-    image: "/team/adebowale-precious.jpg",
+    image: "/team/adebowale-precious-2.jpg",
     email: "bdm@fixitmulticoncepts.com",
     bio: [
       "Adebowale Precious Adesanmi is a Business Development Officer at FixIt Multiconcepts Ltd, responsible for researching prospective clients and business partners, identifying new business opportunities, and supporting the organisation's growth and service delivery. She contributes to building valuable business relationships and strengthening the company's market presence through effective research, client engagement and business development initiatives.",

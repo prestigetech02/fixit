@@ -147,7 +147,7 @@ export default function WhoWeArePage() {
             >
               Growing with Nigeria&apos;s Infrastructure
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-zinc-600 sm:text-lg">
+            <p className="mt-6 text-justify text-base leading-relaxed text-zinc-600 sm:text-lg">
               FixIt Multiconcepts Limited is a nationwide facility management
               provider of choice for some of Nigeria&apos;s leading brands. With
               a commitment to excellence and efficiency, FixIt delivers
@@ -158,7 +158,7 @@ export default function WhoWeArePage() {
             <h3 className="mt-10 text-xl font-bold tracking-tight text-primary sm:text-2xl">
               Scope of Expertise
             </h3>
-            <p className="mt-4 text-base leading-relaxed text-zinc-600 sm:text-lg">
+            <p className="mt-4 text-justify text-base leading-relaxed text-zinc-600 sm:text-lg">
               Our extensive experience spans residential estates, commercial
               offices, public spaces, transport infrastructures, roads, bus
               terminals, and healthcare facilities. FixIt is dedicated to

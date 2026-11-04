@@ -32,7 +32,7 @@ const slides = [
       "Modern cleaning equipment and disciplined processes, protecting the spaces where Nigeria works, travels, and gathers.",
   },
   {
-    src: "/hero/team.JPG",
+    src: "/hero/team.jpg",
     alt: "FixIt cleaning and maintenance team in uniform at a Lagos terminal",
     // Keep heads in frame; bias slightly down from pure top.
     position: "object-[center_15%]",
