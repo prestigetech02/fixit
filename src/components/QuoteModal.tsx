@@ -2,12 +2,14 @@
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import Button from "@/components/Button";
+import RecaptchaNotice from "@/components/RecaptchaNotice";
 import {
   isQuoteHref,
   QuoteModalStateProvider,
   useQuoteModal,
 } from "@/components/quote-modal-context";
 import { services } from "@/data/services";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
 
 const fieldClass =
   "mt-2 w-full rounded-sm border border-zinc-200 bg-white px-3 py-3 text-sm text-zinc-900 outline-none transition-colors placeholder:text-zinc-400 focus:border-primary";
@@ -70,6 +72,7 @@ function QuoteModalDialog() {
     setError("");
 
     try {
+      const recaptchaToken = await getRecaptchaToken("quote");
       const response = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -81,6 +84,7 @@ function QuoteModalDialog() {
           service: data.get("service"),
           details: data.get("details"),
           company: data.get("company"),
+          recaptchaToken,
         }),
       });
 
@@ -260,6 +264,8 @@ function QuoteModalDialog() {
               Cancel
             </button>
           </div>
+
+          <RecaptchaNotice className="mt-4" />
 
           {status === "sent" ? (
             <p className="mt-4 text-sm font-medium text-primary">

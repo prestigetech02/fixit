@@ -343,3 +343,8 @@ body {
 .btn-split--light:focus-visible {
   color: #ffffff;
 }
+
+/* Hide default reCAPTCHA badge; forms show the required Google notice instead. */
+.grecaptcha-badge {
+  visibility: hidden;
+}

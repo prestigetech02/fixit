@@ -4,6 +4,7 @@ import {
   isMailConfigured,
   sendLeadEmail,
 } from "@/lib/mail";
+import { verifyRecaptchaToken } from "@/lib/recaptcha";
 
 type ContactBody = {
   name?: string;
@@ -12,6 +13,7 @@ type ContactBody = {
   subject?: string;
   message?: string;
   company?: string; // honeypot
+  recaptchaToken?: string;
 };
 
 function required(value: unknown, label: string) {
@@ -39,6 +41,11 @@ export async function POST(request: Request) {
     if (body.company?.trim()) {
       return NextResponse.json({ ok: true });
     }
+
+    await verifyRecaptchaToken({
+      token: body.recaptchaToken,
+      expectedAction: "contact",
+    });
 
     const name = required(body.name, "Name");
     const email = required(body.email, "Email");

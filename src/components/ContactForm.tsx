@@ -2,6 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import Button from "@/components/Button";
+import RecaptchaNotice from "@/components/RecaptchaNotice";
+import { getRecaptchaToken } from "@/lib/recaptcha-client";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -18,6 +20,7 @@ export default function ContactForm() {
     setError("");
 
     try {
+      const recaptchaToken = await getRecaptchaToken("contact");
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,6 +31,7 @@ export default function ContactForm() {
           subject: data.get("subject"),
           message: data.get("message"),
           company: data.get("company"),
+          recaptchaToken,
         }),
       });
 
@@ -115,6 +119,7 @@ export default function ContactForm() {
         <Button type="submit" className="px-6 py-3" disabled={status === "sending"}>
           {status === "sending" ? "Sending..." : "Send message"}
         </Button>
+        <RecaptchaNotice className="mt-3" />
         {status === "sent" ? (
           <p className="mt-3 text-sm font-medium text-primary">
             Thanks. Your message has been sent. We will get back to you soon.

@@ -1,6 +1,7 @@
-const zeptoToken = process.env.ZEPTOMAIL_TOKEN;
+const zeptoTokenRaw = process.env.ZEPTOMAIL_TOKEN?.trim() ?? "";
+const zeptoToken = zeptoTokenRaw.replace(/^Zoho-enczapikey\s+/i, "");
 const zeptoApiUrl =
-  process.env.ZEPTOMAIL_API_URL ?? "https://api.zeptomail.com/v1.1/email";
+  process.env.ZEPTOMAIL_API_URL ?? "https://cpaas.zoho.com/v1.1/email";
 const bounceAddress = process.env.ZEPTOMAIL_BOUNCE_ADDRESS;
 const toEmail =
   process.env.CONTACT_TO_EMAIL ?? "operations@fixitmulticoncepts.com";
@@ -21,6 +22,41 @@ function parseAddress(value: string): { address: string; name?: string } {
     return { name: match[1].trim() || undefined, address: match[2].trim() };
   }
   return { address: value.trim() };
+}
+
+function extractZeptoError(
+  result: unknown,
+  status: number,
+): string {
+  if (!result || typeof result !== "object") {
+    return `ZeptoMail request failed (${status})`;
+  }
+
+  const record = result as Record<string, unknown>;
+  const error = record.error;
+
+  if (error && typeof error === "object") {
+    const err = error as Record<string, unknown>;
+    if (typeof err.message === "string" && err.message.trim()) {
+      return err.message;
+    }
+    const details = err.details;
+    if (Array.isArray(details) && details[0] && typeof details[0] === "object") {
+      const first = details[0] as Record<string, unknown>;
+      if (typeof first.message === "string" && first.message.trim()) {
+        return first.message;
+      }
+    }
+  }
+
+  if (typeof record.error_message === "string" && record.error_message.trim()) {
+    return record.error_message;
+  }
+  if (typeof record.message === "string" && record.message.trim()) {
+    return record.message;
+  }
+
+  return `ZeptoMail request failed (${status})`;
 }
 
 export function isMailConfigured() {
@@ -72,26 +108,22 @@ export async function sendLeadEmail(payload: MailPayload) {
     body: JSON.stringify(body),
   });
 
-  const result = (await response.json().catch(() => null)) as
-    | {
-        data?: unknown;
-        message?: string;
-        error?: { message?: string; code?: string };
-        error_code?: string | number;
-        error_message?: string;
-      }
-    | null;
+  const result = await response.json().catch(() => null);
 
   if (!response.ok) {
-    const message =
-      result?.error?.message ||
-      result?.error_message ||
-      result?.message ||
-      `ZeptoMail request failed (${response.status})`;
-    throw new Error(message);
+    throw new Error(extractZeptoError(result, response.status));
   }
 
-  return result?.data ?? result;
+  if (
+    result &&
+    typeof result === "object" &&
+    "data" in result &&
+    (result as { data?: unknown }).data !== undefined
+  ) {
+    return (result as { data: unknown }).data;
+  }
+
+  return result;
 }
 
 export function escapeHtml(value: string) {
