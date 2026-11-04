@@ -111,7 +111,31 @@ export async function sendLeadEmail(payload: MailPayload) {
   const result = await response.json().catch(() => null);
 
   if (!response.ok) {
-    throw new Error(extractZeptoError(result, response.status));
+    const raw = extractZeptoError(result, response.status);
+    const normalized = raw.toLowerCase();
+
+    if (
+      normalized.includes("access denied") ||
+      normalized.includes("invalid api") ||
+      normalized.includes("invalid sendmail") ||
+      normalized.includes("token")
+    ) {
+      throw new Error(
+        "Email service rejected the request. Check ZEPTOMAIL_TOKEN and that a sending domain is verified in Zoho CPaaS.",
+      );
+    }
+
+    if (
+      normalized.includes("domain") ||
+      normalized.includes("sender") ||
+      normalized.includes("from")
+    ) {
+      throw new Error(
+        "Sender address is not verified in Zoho CPaaS. Add and verify your domain, then set CONTACT_FROM_EMAIL to an address on that domain.",
+      );
+    }
+
+    throw new Error(raw);
   }
 
   if (
